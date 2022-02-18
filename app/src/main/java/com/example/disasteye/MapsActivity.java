@@ -1,11 +1,13 @@
 package com.example.disasteye;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,8 +17,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -43,28 +43,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onQueryTextSubmit(String s) {
                 String locationName = searchView.getQuery().toString();
-                ArrayList<Address> addressList = new ArrayList<>();
+                List<Address> addresses = null;
 
                 if (locationName.equals("") || locationName != null){
                     // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                    //Given locationName, it gecodes the location on map, and adds to addressList
-                    try { addressList.add((Address) geocoder.getFromLocationName(locationName, 1)); }
-                    catch(Exception except){ except.printStackTrace(); }
+                    //Given locationName, it will gecode the location on map, and adds to addressList
+                    try { addresses = geocoder.getFromLocationName(locationName, 1); }
+                    catch(Exception except){  except.printStackTrace(); }
 
                     //Get location, from the first position listed in addressList:
-                    Address address = null;
-                    try{ address = (Address) addressList.get(0); }
-                    catch(IndexOutOfBoundsException exception){ exception.printStackTrace();}
-                    // Add location's cordinates:
+                    Address address = addresses.get(0);
+                    Log.d("address", addresses.get(0)+" and "+ address);
+
+                    // Add location's coordinates:
                     LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
+                    mMap.clear();
                     // Add marker to pos.
                     mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
-
-                    // Animate camera to pos.
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    // Move to pos.
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }
                 //Returns false to let search view perform default action:
                 return false;
@@ -75,9 +76,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
     }
-
 
     /**
      * Manipulates the map once available.
@@ -89,7 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
