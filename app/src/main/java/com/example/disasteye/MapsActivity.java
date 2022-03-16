@@ -75,11 +75,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onQueryTextChange(String s) {
                 return false;
             }
+
+            
         });
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
     }
+
+
+    /*
+    navigationView.setNavigationItemSelectedListener { menuItem ->
+        // Handle menu item selected
+        menuItem.isChecked = true;
+        drawerLayout.close();
+        //true;
+    }
+     */
 
     /**
      * Manipulates the map once available.

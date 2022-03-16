@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/menu/my_navigation_items.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/menu/navigation_drawer.xml" value="0.1" />
         <entry key="..\:/Users/patri/AndroidStudioProjects/Disasteye/app/src/main/res/layout/activity_maps.xml" value="0.18802083333333333" />
       </map>
     </option>
