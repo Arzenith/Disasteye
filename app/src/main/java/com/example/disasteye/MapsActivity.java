@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     SearchView searchView;
@@ -47,23 +48,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 String locationName = searchView.getQuery().toString();
                 List<Address> addresses = null;
 
-                if (locationName.equals("") || locationName != null){
+                if (locationName.equals("") || locationName != null) {
                     // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
                     //Given locationName, it will gecode the location on map, and adds to addressList
-                    try { addresses = geocoder.getFromLocationName(locationName, 1); }
-                    catch(Exception except){  except.printStackTrace(); }
+                    try {
+                        addresses = geocoder.getFromLocationName(locationName, 1);
+                    } catch (Exception except) {
+                        except.printStackTrace();
+                    }
 
                     //Get location, from the first position listed in addressList:
                     Address address = addresses.get(0);
-                    Log.d("address", addresses.get(0)+" and "+ address);
+                    Log.d("address", addresses.get(0) + " and " + address);
 
                     // Add location's coordinates:
                     LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
@@ -78,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Returns false to let search view perform default action:
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
@@ -87,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mapFragment.getMapAsync(this);
         }
 
-        final MaterialToolbar TopAppBar = (MaterialToolbar)findViewById(R.id.topAppBar);
+        final MaterialToolbar TopAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
         //void setSupportActionBar(TopAppBar);
         TopAppBar.setNavigationIcon(R.drawable.ic_menu_24);
         TopAppBar.setOnClickListener(
@@ -100,17 +105,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         );
-        TopAppBar.setOnLeftSwipeListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
-                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-                        drawer.openDrawer(Gravity.START);
-                    }
-                }
-        );
-
     }
 
 
@@ -133,13 +127,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    @SuppressLint("MissingPermission")
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //Trying to push stuff
-        // trying to push stuff 2
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+       // mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                System.out.println(mMap.getCameraPosition().target.latitude);
+                System.out.println(mMap.getCameraPosition().target.longitude);
+            }
+        });
+
+        //Setting default location. Features to include:
+        //1.Need to check if gps is enabled. -- Request to enable if not.
+        //2. Update google maps, showing user location.
+
     }
 }
