@@ -14,16 +14,18 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
     //public void onPreExecute(){    }
     public String doInBackground(String... args){
         try{
-            //create link, open connection
+            //Create link, open connection
             URL url = new URL(args[0]);
             HttpURLConnection urlConnection = (HttpURLConnection)  url.openConnection();
 
-            //waiting on data in the background:
+            //Waiting on data in the background:
             InputStream replied = urlConnection.getInputStream();
 
             //Parsing the JSON we receive...
             //1. Read data
+
             //2. Convert to JSON object
+
         }
         catch(Exception e){
             Log.e(null, "doInBackground error occurred: ", e);
