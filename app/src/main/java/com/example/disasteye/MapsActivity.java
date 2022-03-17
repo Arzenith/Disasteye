@@ -1,9 +1,6 @@
 package com.example.disasteye;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
@@ -14,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,9 +20,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+import org.json.JSONObject;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -38,6 +36,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //request will recieve a URL and gather data from the API!
+        String link = "https://eonet.gsfc.nasa.gov/api/v3/events";
+        HTTPRequest request = new HTTPRequest();
+        request.execute(link);
 
         //R.id.idSearchView is found in the activity_maps.xml  -- Searches given location
         //More on searchView doc: https://abhiandroid.com/ui/searchview#SearchView_Methods_In_Android
