@@ -1,13 +1,19 @@
 package com.example.disasteye;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,10 +22,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     SearchView searchView;
@@ -70,17 +78,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Returns false to let search view perform default action:
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
             }
-
-            
         });
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        final MaterialToolbar TopAppBar = (MaterialToolbar)findViewById(R.id.topAppBar);
+        //void setSupportActionBar(TopAppBar);
+        TopAppBar.setNavigationIcon(R.drawable.ic_menu_24);
+        TopAppBar.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+                        drawer.openDrawer(Gravity.START);
+                    }
+                }
+        );
+        TopAppBar.setOnLeftSwipeListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+                        drawer.openDrawer(Gravity.START);
+                    }
+                }
+        );
+
     }
 
 
@@ -89,9 +119,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Handle menu item selected
         menuItem.isChecked = true;
         drawerLayout.close();
-        //true;
     }
      */
+
 
     /**
      * Manipulates the map once available.
