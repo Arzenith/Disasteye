@@ -64,6 +64,13 @@
             android:elevation="5dp"
             app:iconifiedByDefault="false"
             app:queryHint="Search Here" />
+        <!--Bottom Nav -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomSheetButton"
+            android:text="BottomNav"
+            android:layout_alignParentBottom="true"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
