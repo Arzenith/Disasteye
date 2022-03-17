@@ -1,5 +1,6 @@
 package com.example.disasteye;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
@@ -12,6 +13,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
@@ -39,6 +44,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //bottomNav
+        //FrameLayout outer = (FrameLayout)findViewById(R.id.design_bottom_sheet);
+        LinearLayout bottomSheet = (LinearLayout)findViewById(R.id.design_bottom_sheet);
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+
+        behavior.setPeekHeight(200);
+        behavior.setHideable(true);
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+
+
 
 
         //request will recieve a URL and gather data from the API!
@@ -108,13 +125,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onClick(View v) {
                         //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-                        drawer.openDrawer(Gravity.START);
+                        //drawer.openDrawer(Gravity.START);
                     }
                 }
         );
 
         //bottomNav
-
+        /*
         bottomNav = findViewById(R.id.bottomSheetButton);
 
         bottomNav.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +143,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 bottomSheetDialog.show();
             }
         });
+
+         */
     }
 
 
