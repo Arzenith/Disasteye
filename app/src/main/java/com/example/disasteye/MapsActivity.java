@@ -2,6 +2,7 @@ package com.example.disasteye;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
@@ -14,8 +15,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -37,7 +41,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     SearchView searchView;
-    Button bottomNav;
+
+
+
+    private ConstraintLayout bottomSheet;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private LinearLayout headerLayout;
+    private ImageView swiper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +55,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //bottomNav
-        //FrameLayout outer = (FrameLayout)findViewById(R.id.design_bottom_sheet);
-        LinearLayout bottomSheet = (LinearLayout)findViewById(R.id.design_bottom_sheet);
-        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
 
-        behavior.setPeekHeight(200);
-        behavior.setHideable(true);
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheet = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        headerLayout = findViewById(R.id.header_layout);
+        swiper = findViewById(R.id.swiper);
 
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 
 
 
@@ -166,6 +183,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+
     @Override
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
@@ -185,4 +204,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //2. Update google maps, showing user location.
 
     }
+
+
 }

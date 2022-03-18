@@ -12,7 +12,8 @@
         <entry key="app/src/main/res/drawable/round.xml" value="0.247" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.28489583333333335" />
+        <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.28489583333333335" />
       </map>
     </option>
   </component>
