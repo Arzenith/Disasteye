@@ -6,21 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity">
 
-    <!--
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/bottom_sheet_dialog"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    -->
-
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="start">
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -49,9 +39,6 @@
         <!-- Content that appears on screen (not on the hamburger menu) goes here: -->
 
         <!--Display our maps: -->
-
-        <!--To search location:-->
-
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -59,6 +46,7 @@
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
 
+        <!--To search location:-->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/idSearchView"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -73,11 +61,7 @@
             android:elevation="5dp"
             app:iconifiedByDefault="false"
             app:queryHint="Search Here" />
-
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

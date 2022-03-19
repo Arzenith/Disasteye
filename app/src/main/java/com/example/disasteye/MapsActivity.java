@@ -43,7 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SearchView searchView;
 
 
-
     private ConstraintLayout bottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
     private LinearLayout headerLayout;
@@ -156,7 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onClick(View v) {
                         //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-                        //drawer.openDrawer(Gravity.START);
+                        drawer.openDrawer(Gravity.LEFT);
                     }
                 }
         );
