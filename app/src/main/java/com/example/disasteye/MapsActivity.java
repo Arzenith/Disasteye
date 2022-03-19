@@ -64,7 +64,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                //Sets max/min to bottom sheet scroll.
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setPeekHeight(600);
+                    mMap.getUiSettings().setScrollGesturesEnabled(false);
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
 
+                    if (bottomSheetBehavior.getPeekHeight() == 600) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        bottomSheetBehavior.setPeekHeight(80);
+                        mMap.getUiSettings().setScrollGesturesEnabled(false);
+                    } else if (bottomSheetBehavior.getPeekHeight() == 80) {
+                        mMap.getUiSettings().setScrollGesturesEnabled(true);
+                    }
+
+                }
             }
 
             @Override
