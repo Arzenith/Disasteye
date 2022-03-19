@@ -42,7 +42,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     SearchView searchView;
 
-
     private ConstraintLayout bottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
     private LinearLayout headerLayout;
@@ -54,30 +53,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setMaxHeight(1800);
         headerLayout = findViewById(R.id.header_layout);
         swiper = findViewById(R.id.swiper);
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                //Sets max/min to bottom sheet scroll.
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetBehavior.setPeekHeight(450);
-                    mMap.getUiSettings().setScrollGesturesEnabled(false);
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
 
-                    if (bottomSheetBehavior.getPeekHeight() == 450) {
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        bottomSheetBehavior.setPeekHeight(80);
-                        mMap.getUiSettings().setScrollGesturesEnabled(false);
-                    } else if (bottomSheetBehavior.getPeekHeight() == 80) {
-                        mMap.getUiSettings().setScrollGesturesEnabled(true);
-                    }
-
-                }
             }
 
             @Override
@@ -85,7 +70,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-
 
 
         //request will recieve a URL and gather data from the API!
@@ -98,8 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         searchView = (SearchView) findViewById(R.id.idSearchView);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -159,33 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         );
-
-        //bottomNav
-        /*
-        bottomNav = findViewById(R.id.bottomSheetButton);
-
-        bottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MapsActivity.this);
-                bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
-                bottomSheetDialog.setCanceledOnTouchOutside(true);
-                bottomSheetDialog.show();
-            }
-        });
-
-         */
     }
-
-
-    /*
-    navigationView.setNavigationItemSelectedListener { menuItem ->
-        // Handle menu item selected
-        menuItem.isChecked = true;
-        drawerLayout.close();
-    }
-     */
-
 
     /**
      * Manipulates the map once available.
@@ -196,7 +153,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
 
     @Override
     @SuppressLint("MissingPermission")
