@@ -7,14 +7,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/rounded"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="200dp"
+    app:behavior_peekHeight="62dp"
     style="@style/Widget.Material3.BottomSheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@drawable/rounded">
+
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="0dp"
