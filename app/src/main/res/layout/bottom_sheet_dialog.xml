@@ -8,7 +8,7 @@
     android:background="@drawable/rounded"
     app:behavior_hideable="true"
     app:behavior_peekHeight="62dp"
-    style="@style/Widget.MaterialComponents.BottomSheet"
+    style="@style/Widget.Material3.BottomSheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
 
