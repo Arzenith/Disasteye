@@ -24,7 +24,6 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
 
     //public void onPreExecute(){    }
     public String doInBackground(String... args){
-        Log.d("HERE!!!", "Beginning of doInBackground");
         //ETHANS IMPLEMENTATION
 //        try{
 //            //Create link, open connection
@@ -51,7 +50,6 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
 
         try
         {
-            ////////////////////////////////////////////////////////////////////////////////////////
             // ESTABLISHING CONNECTION BETWEEN API
             URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires");
             connection = (HttpsURLConnection) url.openConnection();
