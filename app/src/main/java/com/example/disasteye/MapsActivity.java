@@ -61,32 +61,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setMaxHeight(1800);
         bottomSheetBehavior.setPeekHeight(200);
-        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setHideable(false);
         headerLayout = findViewById(R.id.header_layout);
         swiper = findViewById(R.id.swiper);
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-
-
-                }
-                else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    //BottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-
-                }
-
             }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
             }
         });
-
 
         //request will receive a URL and gather data from the API!
         String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires";
@@ -101,46 +88,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    String locationName = searchView.getQuery().toString();
-                    List<Address> addresses = null;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String locationName = searchView.getQuery().toString();
+                List<Address> addresses = null;
 
-                    if (locationName.equals("") || locationName != null) {
-                        // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
-                        Geocoder geocoder = new Geocoder(MapsActivity.this);
+                if (locationName.equals("") || locationName != null) {
+                    // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                        //Given locationName, it will gecode the location on map, and adds to addressList
-                        try {
-                            addresses = geocoder.getFromLocationName(locationName, 1);
-                        }
-                        catch (Exception except) {
-                            except.printStackTrace();
-                        }
-
-                        //Get location, from the first position listed in addressList:
-                        Address address = addresses.get(0);
-                        Log.d("address", addresses.get(0) + " and " + address);
-
-                        // Add location's coordinates:
-                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-
-                        mMap.clear();
-                        // Add marker to pos.
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
-                        // Move to pos.
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    //Given locationName, it will gecode the location on map, and adds to addressList
+                    try {
+                        addresses = geocoder.getFromLocationName(locationName, 1);
                     }
-                    //Returns false to let search view perform default action:
-                    return false;
+                    catch (Exception except) {
+                        except.printStackTrace();
+                    }
+
+                    //Get location, from the first position listed in addressList:
+                    Address address = addresses.get(0);
+                    Log.d("address", addresses.get(0) + " and " + address);
+
+                    // Add location's coordinates:
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+                    mMap.clear();
+                    // Add marker to pos.
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
+                    // Move to pos.
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
-                }
-            });
+                //Returns false to let search view perform default action:
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
@@ -173,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-       // mMap.setMyLocationEnabled(true);
+        // mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
@@ -188,6 +175,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //2. Update google maps, showing user location.
 
     }
-
-
 }
