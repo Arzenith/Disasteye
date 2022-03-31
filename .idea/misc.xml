@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_drought.xml" value="0.135" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_earthquake.xml" value="0.135" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_flood.xml" value="0.135" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_wild_fire.xml" value="0.135" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/rounded.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.1" />
