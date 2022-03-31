@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Disasteye</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="sent_message">Could not find location.</string>
 </resources>

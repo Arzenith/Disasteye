@@ -3,10 +3,12 @@ package com.example.disasteye;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -56,6 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setMaxHeight(1800);
+        bottomSheetBehavior.setPeekHeight(200);
+        bottomSheetBehavior.setHideable(true);
         headerLayout = findViewById(R.id.header_layout);
         swiper = findViewById(R.id.swiper);
 
@@ -63,8 +69,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
-            }
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
 
+
+                }
+                else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    //BottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+                else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+
+                }
+
+            }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
@@ -72,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
 
-        //request will recieve a URL and gather data from the API!
+        //request will receive a URL and gather data from the API!
         String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires";
         HTTPRequest request = new HTTPRequest();
         request.execute(link);
@@ -85,46 +101,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                String locationName = searchView.getQuery().toString();
-                List<Address> addresses = null;
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    String locationName = searchView.getQuery().toString();
+                    List<Address> addresses = null;
 
-                if (locationName.equals("") || locationName != null) {
-                    // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
-                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+                    if (locationName.equals("") || locationName != null) {
+                        // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
+                        Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                    //Given locationName, it will gecode the location on map, and adds to addressList
-                    try {
-                        addresses = geocoder.getFromLocationName(locationName, 1);
-                    } catch (Exception except) {
-                        except.printStackTrace();
+                        //Given locationName, it will gecode the location on map, and adds to addressList
+                        try {
+                            addresses = geocoder.getFromLocationName(locationName, 1);
+                        }
+                        catch (Exception except) {
+                            except.printStackTrace();
+                        }
+
+                        //Get location, from the first position listed in addressList:
+                        Address address = addresses.get(0);
+                        Log.d("address", addresses.get(0) + " and " + address);
+
+                        // Add location's coordinates:
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+                        mMap.clear();
+                        // Add marker to pos.
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
+                        // Move to pos.
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                     }
-
-                    //Get location, from the first position listed in addressList:
-                    Address address = addresses.get(0);
-                    Log.d("address", addresses.get(0) + " and " + address);
-
-                    // Add location's coordinates:
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-
-                    mMap.clear();
-                    // Add marker to pos.
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
-                    // Move to pos.
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    //Returns false to let search view perform default action:
+                    return false;
                 }
-                //Returns false to let search view perform default action:
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    return false;
+                }
+            });
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
@@ -153,7 +169,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
     @Override
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
