@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,6 +44,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -100,31 +102,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String locationName = searchView.getQuery().toString();
                 List<Address> addresses = null;
 
-                if (locationName.equals("") || locationName != null) {
+                if (locationName != null) {
                     // Create geocoder obj -- takes address and finds location: https://developer.android.com/reference/android/location/Geocoder
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                    //Given locationName, it will gecode the location on map, and adds to addressList
+                     //Given locationName, it will gecode the location on map, and adds to addressList
                     try {
                         addresses = geocoder.getFromLocationName(locationName, 1);
-                    }
-                    catch (Exception except) {
+                    } catch (IOException except) {
                         except.printStackTrace();
                     }
 
                     //Get location, from the first position listed in addressList:
-                    Address address = addresses.get(0);
-                    Log.d("address", addresses.get(0) + " and " + address);
-
-                    // Add location's coordinates:
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-
-                    mMap.clear();
-                    // Add marker to pos.
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
-                    // Move to pos.
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                   try{
+                       Address address = addresses.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.clear();
+                        // Add marker to pos.
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
+                        // Move to pos.
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    }
+                   catch(Exception except) {
+                       Toast.makeText(MapsActivity.this, "Location not found. Try again.",
+                               Toast.LENGTH_SHORT).show();
+                       except.printStackTrace();
+                    }
                 }
                 //Returns false to let search view perform default action:
                 return false;
@@ -139,13 +143,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         final MaterialToolbar TopAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
-        //void setSupportActionBar(TopAppBar);
         TopAppBar.setNavigationIcon(R.drawable.ic_menu_24);
         TopAppBar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Toast.makeText(MapsActivity.this, "SideBar Clicked", Toast.LENGTH_LONG).show();
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
                         drawer.openDrawer(Gravity.LEFT);
                     }
@@ -179,6 +181,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+    //Documentation: https://developers.google.com/android/reference/com/google/android/gms/maps/model/package-summary
+    //BitmapDescriptor defines our bitmap image.
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId){
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
