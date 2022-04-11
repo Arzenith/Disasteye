@@ -3,6 +3,8 @@ package com.example.disasteye;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,6 +54,7 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
         {
             // ESTABLISHING CONNECTION BETWEEN API
             URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires");
+//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -122,12 +125,21 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
             // Grabs title string for event: "title: 'TITLE'"
             String title = properties.getString("title");
 
+            // Grabs categories array in features array "categories: {...}"
+            JSONArray categories = properties.getJSONArray("categories");
+            // Grabs the first object in the categories array "{...}"
+            JSONObject subset = categories.getJSONObject(0);
+            // Grabs id string from object "'id': '<disasterType>'"
+            String disasterType = subset.getString("id");
+
             // Grabs geometry object for each iteration in features array "geometry: {...}"
             JSONObject geometry = features.getJSONObject(i).getJSONObject("geometry");
             // Grabs array given by coordinate attribute "coordinates: [...,...]"
             JSONArray coords = geometry.getJSONArray("coordinates");
+            // Converts JSONArray type to LatLng type
+            LatLng coord = new LatLng((Double)coords.get(0), (Double)coords.get(1));
 
-            System.out.println(title + " " + coords);
+            new Event(coord, title, disasterType);
         }
         return null;
     }
