@@ -7,16 +7,20 @@ public class Event {
     public String title;
     public String disasterType;
 
-    Event (LatLng coords, String title, String disasterType)
+    public Event (LatLng coords, String title, String disasterType)
     {
         this.coords = coords;
         this.title = title;
         this.disasterType = disasterType;
-        printEvent();
+        //printEvent();
     }
 
     public void printEvent()
     {
         System.out.println(this.title + " " + this.disasterType + " " + this.coords);
+    }
+
+    @Override public String toString() {
+        return "Title: " + title + " Disaster: " + disasterType +  " Coordinates: " + coords +"\n";
     }
 }

@@ -45,15 +45,25 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    public MapsActivity(){
+
+    }
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     SearchView searchView;
+
+    ArrayList<LatLng> wildfireArray = new ArrayList<>();
+    ArrayList<LatLng> floodArray = new ArrayList<>();
+    ArrayList<LatLng> droughtArray = new ArrayList<>();
+    ArrayList<LatLng> earthquakeArray = new ArrayList<>();
 
     private ConstraintLayout bottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -83,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        //request will receive a URL and gather data from the API!
+        //Request will receive a URL and gather data from the API!
         String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires";
         HTTPRequest request = new HTTPRequest();
         request.execute(link);
@@ -94,6 +104,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        //Add the coordinates for all our markers.
+        ArrayList<Event> eventArray = request.getEvents();
+        //System.out.println("EVENTS ARE " + request.getEvents());
+        try {
+            for (Event e : eventArray) {
+                System.out.println("EVENT BEING "+ e);
+                if (e.disasterType.contains("wildfires")) {
+                    wildfireArray.add(e.coords);
+                }
+//                else if (e.disasterType.contains("flood")) {
+//                    floodArray.add(e.coords);
+//                } else if (e.disasterType.contains("drought")) {
+//                    droughtArray.add(e.coords);
+//                } else if (e.disasterType.contains("earthquake")) {
+//                    earthquakeArray.add(e.coords);
+//                }
+            }
+        }
+        catch(Exception exception){
+            exception.printStackTrace();
+        }
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -168,9 +200,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng sydney = new LatLng(-34,151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney")
-                .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
+
+        try {
+            for (LatLng latLng : wildfireArray) {
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Wildfire")
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
+            }
+//            for (LatLng latLng : droughtArray) {
+//                mMap.addMarker(new MarkerOptions().position(latLng).title("Drought")
+//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_drought)));
+//            }
+//            for (LatLng latLng : floodArray) {
+//                mMap.addMarker(new MarkerOptions().position(latLng).title("Flood")
+//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_flood)));
+//            }
+//            for (LatLng latLng : earthquakeArray) {
+//                mMap.addMarker(new MarkerOptions().position(latLng).title("Earthquake")
+//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_earthquake)));
+//            }
+        }
+        catch(Exception except){
+            except.printStackTrace();
+        }
 
         googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override

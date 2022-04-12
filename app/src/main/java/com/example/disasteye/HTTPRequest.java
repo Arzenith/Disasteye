@@ -7,11 +7,10 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,32 +18,14 @@ import org.json.JSONArray;
 
 import javax.net.ssl.HttpsURLConnection;
 
-class HTTPRequest extends AsyncTask<String, Integer, String> {
+public class HTTPRequest extends AsyncTask<String, Integer, String> {
     //AsyncTask: https://developer.android.com/reference/android/os/AsyncTask
     //<args, progress, result> needs 4 things to happen: onPreExecute(), doInBackground(param), onProgressUpdate(), and onPostExecute()
     private static HttpsURLConnection connection;
+    private static ArrayList<Event> events = new ArrayList<>();
 
     //public void onPreExecute(){    }
     public String doInBackground(String... args){
-        //ETHANS IMPLEMENTATION
-//        try{
-//            //Create link, open connection
-//            URL url = new URL(args[0]);
-//            HttpURLConnection urlConnection = (HttpURLConnection)  url.openConnection();
-//
-//            //Waiting on data in the background:
-//            InputStream replied = urlConnection.getInputStream();
-//
-//            //Parsing the JSON we receive...
-//            //1. Read data
-//
-//            //2. Convert to JSON object
-//
-//        }
-//        catch(Exception e){
-//            Log.e(null, "doInBackground error occurred: ", e);
-//        }
-
         // READING IN DATA FROM API
         BufferedReader reader;
         String line;
@@ -104,20 +85,20 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
 
         try {
             parse(responseContent.toString());
+            //getEvents();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return null;
+        return responseContent.toString();
     }
 
     // Function parses data from the response of the API, converts data into JSONArray OR JSONObject
-    public static String parse(String responseBody) throws JSONException {
-        // Grabs everthing within {}
+    //ArrayList<Event>
+    public void parse(String responseBody) throws JSONException {
+        // Grabs everything within {}
         JSONObject obj = new JSONObject(responseBody);
         // Grabs features array "features: [...]"
         JSONArray features = obj.getJSONArray("features");
-
         for (int i = 0; i < features.length(); i++)
         {
             // Grabs properties object for each iteration in features array "properties: {...}"
@@ -139,13 +120,25 @@ class HTTPRequest extends AsyncTask<String, Integer, String> {
             // Converts JSONArray type to LatLng type
             LatLng coord = new LatLng((Double)coords.get(0), (Double)coords.get(1));
 
-            new Event(coord, title, disasterType);
+            Event e = new Event(coord, title, disasterType);
+            events.add(e);
+            //System.out.println("EVENT BEFORE GET EVENTS:" + events.toString());
         }
-        return null;
+        //System.out.println("EVENT RETURNS:"+ events.toString());
     }
 
     protected void onProgressUpdate(Integer... progress){
     }
-    public void onPostExecute(String fromDoInBackground){
+    public void onPostExecute(String fromDoInBackground) {
+        try {
+            System.out.println("INSIDE POST");
+            getEvents();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<Event> getEvents(){
+        System.out.println("EVENT DURING GET EVENTS:" + events.toString());
+        return events;
     }
 }
