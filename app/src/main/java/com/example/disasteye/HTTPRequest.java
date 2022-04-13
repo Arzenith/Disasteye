@@ -35,7 +35,6 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         {
             // ESTABLISHING CONNECTION BETWEEN API
             URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,drought,floods,earthquakes,volcanoes");
-//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,droguhts");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -123,13 +122,11 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
 
             Event e = new Event(coord, title, disasterType);
             this.events.add(e);
-            //System.out.println("EVENT BEFORE GET EVENTS:" + events.toString());
         }
-//        System.out.println("EVENT RETURNS:"+ events.toString());
     }
 
     public ArrayList<Event> getEvents(){
-//        System.out.println("EVENT DURING GET EVENTS:" + events.toString());
+//        System.out.println(events.toString());
         return this.events;
     }
 
@@ -137,7 +134,6 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
     }
     public void onPostExecute(String fromDoInBackground) {
         try {
-            System.out.println("INSIDE POST");
             getEvents();
         } catch (Exception e) {
             e.printStackTrace();
