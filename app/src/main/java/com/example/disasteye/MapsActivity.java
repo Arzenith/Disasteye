@@ -212,23 +212,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         try {
             for (Event event : wildfireArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title("Wildfire")
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
             }
             for (Event event : droughtArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title("Drought")
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_drought)));
             }
             for (Event event : floodArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title("Flood")
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_flood)));
             }
             for (Event event : earthquakeArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title("Earthquake")
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_earthquake)));
             }
             for (Event event : volcanoesArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title("Volcanoes")
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
             }
         }

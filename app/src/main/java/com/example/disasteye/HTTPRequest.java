@@ -34,8 +34,8 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         try
         {
             // ESTABLISHING CONNECTION BETWEEN API
-//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,drought,floods,earthquakes");
-            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=volcanoes");
+            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,drought,floods,earthquakes,volcanoes");
+//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,droguhts");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -85,7 +85,6 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
 
         try {
             parse(responseContent.toString());
-            //getEvents();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -117,14 +116,16 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
             JSONObject geometry = features.getJSONObject(i).getJSONObject("geometry");
             // Grabs array given by coordinate attribute "coordinates: [...,...]"
             JSONArray coords = geometry.getJSONArray("coordinates");
+
             // Converts JSONArray type to LatLng type
-            LatLng coord = new LatLng((Double)coords.get(0), (Double)coords.get(1));
+            LatLng coord = new LatLng(Double.parseDouble(coords.get(1).toString()), Double.parseDouble(coords.get(0).toString()));
+
 
             Event e = new Event(coord, title, disasterType);
             this.events.add(e);
             //System.out.println("EVENT BEFORE GET EVENTS:" + events.toString());
         }
-        //System.out.println("EVENT RETURNS:"+ events.toString());
+//        System.out.println("EVENT RETURNS:"+ events.toString());
     }
 
     public ArrayList<Event> getEvents(){
