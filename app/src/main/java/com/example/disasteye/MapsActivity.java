@@ -48,6 +48,8 @@ import java.io.IOException;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
 
@@ -60,10 +62,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     SearchView searchView;
 
-    ArrayList<LatLng> wildfireArray = new ArrayList<>();
-    ArrayList<LatLng> floodArray = new ArrayList<>();
-    ArrayList<LatLng> droughtArray = new ArrayList<>();
-    ArrayList<LatLng> earthquakeArray = new ArrayList<>();
+    ArrayList<Event> wildfireArray = new ArrayList<>();
+    ArrayList<Event> floodArray = new ArrayList<>();
+    ArrayList<Event> droughtArray = new ArrayList<>();
+    ArrayList<Event> earthquakeArray = new ArrayList<>();
+    ArrayList<Event> volcanoesArray = new ArrayList<>();
 
     private ConstraintLayout bottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -96,7 +99,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Request will receive a URL and gather data from the API!
         String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires";
         HTTPRequest request = new HTTPRequest();
-        request.execute(link);
+        try {
+            request.execute(link).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //R.id.idSearchView is found in the activity_maps.xml  -- Searches given location
         //More on searchView doc: https://abhiandroid.com/ui/searchview#SearchView_Methods_In_Android
@@ -107,20 +116,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Add the coordinates for all our markers.
         ArrayList<Event> eventArray = request.getEvents();
-        //System.out.println("EVENTS ARE " + request.getEvents());
         try {
             for (Event e : eventArray) {
-                System.out.println("EVENT BEING "+ e);
-                if (e.disasterType.contains("wildfires")) {
-                    wildfireArray.add(e.coords);
+                if (e.disasterType.toLowerCase().contains("wildfires")) {
+                    wildfireArray.add(e);
                 }
-//                else if (e.disasterType.contains("flood")) {
-//                    floodArray.add(e.coords);
-//                } else if (e.disasterType.contains("drought")) {
-//                    droughtArray.add(e.coords);
-//                } else if (e.disasterType.contains("earthquake")) {
-//                    earthquakeArray.add(e.coords);
-//                }
+                else if (e.disasterType.toLowerCase().contains("floods")) {
+                    floodArray.add(e);
+                } else if (e.disasterType.contains("drought")) {
+                    droughtArray.add(e);
+                } else if (e.disasterType.contains("earthquakes")) {
+                    earthquakeArray.add(e);
+                } else if (e.disasterType.contains("volcanoes")) {
+                    volcanoesArray.add(e);
+                }
             }
         }
         catch(Exception exception){
@@ -202,22 +211,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         try {
-            for (LatLng latLng : wildfireArray) {
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Wildfire")
+            for (Event event : wildfireArray) {
+                mMap.addMarker(new MarkerOptions().position(event.coords).title("Wildfire")
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
             }
-//            for (LatLng latLng : droughtArray) {
-//                mMap.addMarker(new MarkerOptions().position(latLng).title("Drought")
-//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_drought)));
-//            }
-//            for (LatLng latLng : floodArray) {
-//                mMap.addMarker(new MarkerOptions().position(latLng).title("Flood")
-//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_flood)));
-//            }
-//            for (LatLng latLng : earthquakeArray) {
-//                mMap.addMarker(new MarkerOptions().position(latLng).title("Earthquake")
-//                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_earthquake)));
-//            }
+            for (Event event : droughtArray) {
+                mMap.addMarker(new MarkerOptions().position(event.coords).title("Drought")
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_drought)));
+            }
+            for (Event event : floodArray) {
+                mMap.addMarker(new MarkerOptions().position(event.coords).title("Flood")
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_flood)));
+            }
+            for (Event event : earthquakeArray) {
+                mMap.addMarker(new MarkerOptions().position(event.coords).title("Earthquake")
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_earthquake)));
+            }
+            for (Event event : volcanoesArray) {
+                mMap.addMarker(new MarkerOptions().position(event.coords).title("Volcanoes")
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
+            }
         }
         catch(Exception except){
             except.printStackTrace();

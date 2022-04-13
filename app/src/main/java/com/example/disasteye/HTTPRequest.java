@@ -22,7 +22,7 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
     //AsyncTask: https://developer.android.com/reference/android/os/AsyncTask
     //<args, progress, result> needs 4 things to happen: onPreExecute(), doInBackground(param), onProgressUpdate(), and onPostExecute()
     private static HttpsURLConnection connection;
-    private static ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Event> events = new ArrayList<>();
 
     //public void onPreExecute(){    }
     public String doInBackground(String... args){
@@ -34,8 +34,8 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         try
         {
             // ESTABLISHING CONNECTION BETWEEN API
-            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires");
-//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes");
+//            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,drought,floods,earthquakes");
+            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=volcanoes");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -121,10 +121,15 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
             LatLng coord = new LatLng((Double)coords.get(0), (Double)coords.get(1));
 
             Event e = new Event(coord, title, disasterType);
-            events.add(e);
+            this.events.add(e);
             //System.out.println("EVENT BEFORE GET EVENTS:" + events.toString());
         }
         //System.out.println("EVENT RETURNS:"+ events.toString());
+    }
+
+    public ArrayList<Event> getEvents(){
+//        System.out.println("EVENT DURING GET EVENTS:" + events.toString());
+        return this.events;
     }
 
     protected void onProgressUpdate(Integer... progress){
@@ -136,9 +141,5 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public ArrayList<Event> getEvents(){
-        System.out.println("EVENT DURING GET EVENTS:" + events.toString());
-        return events;
     }
 }
