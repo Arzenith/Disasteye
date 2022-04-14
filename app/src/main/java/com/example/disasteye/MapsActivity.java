@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -72,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private BottomSheetBehavior bottomSheetBehavior;
     private LinearLayout headerLayout;
     private ImageView swiper;
+    private ImageButton aboutUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +197,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         );
+
+        //About us button
+        aboutUs = (ImageButton) findViewById(R.id.aboutus);
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAboutUs();
+            }
+        });
     }
+
+    //Function to bring up the about us page
+    public void openAboutUs(){
+        Intent intent = new Intent(this, aboutus.class);
+        startActivity(intent);
+    }
+
+
 
     /**
      * Manipulates the map once available.

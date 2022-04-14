@@ -21,25 +21,32 @@
         <include layout="@layout/bottom_sheet_dialog"/>
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
+                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Nasty Disasteye"
-                app:navigationIcon="@drawable/ic_menu_24"
-                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:background="#1C1C1C"
-                android:elevation="0dp" />
+                android:elevation="0dp"
+                app:navigationIcon="@drawable/ic_menu_24"
+                app:title="Nasty Disasteye" />
+
+            <!-- about us button -->
+
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Content that appears on screen (not on the hamburger menu) goes here: -->
 
         <!--Display our maps: -->
+
+        <!--To search location:-->
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -47,7 +54,6 @@
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
 
-        <!--To search location:-->
         <androidx.appcompat.widget.SearchView
             android:id="@+id/idSearchView"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -62,6 +68,18 @@
             android:elevation="5dp"
             app:iconifiedByDefault="false"
             app:queryHint="Search Here" />
+
+        <ImageButton
+            android:id="@+id/aboutus"
+            android:layout_width="53dp"
+            android:layout_height="46dp"
+            android:layout_gravity="top|right"
+            android:background="#1C1C1C"
+            android:elevation="100dp"
+            android:src="@drawable/ic_baseline_info_24"
+            android:text="about us"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="end|bottom" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.navigation.NavigationView

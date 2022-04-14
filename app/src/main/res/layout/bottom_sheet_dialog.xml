@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_remove_24"
             android:scaleType="centerCrop"
-            android:layout_gravity="center|top"></ImageView>
+            android:layout_gravity="center"></ImageView>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
