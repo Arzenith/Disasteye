@@ -35,9 +35,7 @@
                 android:background="#1C1C1C"
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_menu_24"
-                app:title="Nasty Disasteye" />
-
-            <!-- about us button -->
+                app:title="Disasteye" />
 
 
         </com.google.android.material.appbar.AppBarLayout>

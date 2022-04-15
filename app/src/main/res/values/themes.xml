@@ -1,13 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+
     <style name="Theme.Disasteye" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#1C1C1C</item>
-        <item name="colorPrimaryVariant">#1C1C1C</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryVariant">@android:color/transparent</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#1C1C1C</item>
-        <item name="colorSecondaryVariant">#1C1C1C</item>
+        <item name="colorSecondary">@android:color/transparent</item>
+        <item name="colorSecondaryVariant">@android:color/transparent</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

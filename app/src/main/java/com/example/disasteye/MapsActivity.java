@@ -203,6 +203,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final MaterialToolbar TopAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
+                TopAppBar.setVisibility(View.GONE);
                 openAboutUs();
             }
         });
