@@ -161,9 +161,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                    try{
                        Address address = addresses.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        mMap.clear();
-                        // Add marker to pos.
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
+                        // (Depracated) Add marker to pos.
+                       // mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
+                       // Reason: Took away functionality since we cannot do mMap.clear()  without clearing out our disasters.
+
                         // Move to pos.
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
