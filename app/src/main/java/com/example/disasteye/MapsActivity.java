@@ -37,6 +37,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -64,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     SearchView searchView;
 
+    Marker searchMarker = null;
+
     ArrayList<Event> wildfireArray = new ArrayList<>();
     ArrayList<Event> floodArray = new ArrayList<>();
     ArrayList<Event> droughtArray = new ArrayList<>();
@@ -89,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheetBehavior.setHideable(false);
         headerLayout = findViewById(R.id.header_layout);
         swiper = findViewById(R.id.swiper);
+
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -161,9 +165,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                    try{
                        Address address = addresses.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        // (Depracated) Add marker to pos.
-                       // mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
-                       // Reason: Took away functionality since we cannot do mMap.clear()  without clearing out our disasters.
+
+                        //Add marker, without creating a duplicate marker from previous search:
+                       if(searchMarker != null) {
+                           searchMarker.remove();
+                       }
+                       searchMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(locationName));
 
                         // Move to pos.
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
