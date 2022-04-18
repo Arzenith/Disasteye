@@ -105,11 +105,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //Request will receive a URL and gather data from the API!
-        String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,seaLakeIce,severeStorms";
 
         HTTPRequest request = new HTTPRequest();
         try {
-            request.execute(link).get();
+            request.execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

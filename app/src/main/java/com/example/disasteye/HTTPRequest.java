@@ -34,7 +34,7 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         try
         {
             // ESTABLISHING CONNECTION BETWEEN API
-            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,severeStorms");
+            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,severeStorms,seaLakeIce");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -97,6 +97,7 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         JSONObject obj = new JSONObject(responseBody);
         // Grabs features array "features: [...]"
         JSONArray features = obj.getJSONArray("features");
+
         for (int i = 0; i < features.length(); i++)
         {
             // Grabs properties object for each iteration in features array "properties: {...}"
@@ -114,13 +115,19 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
             // Grabs geometry object for each iteration in features array "geometry: {...}"
             JSONObject geometry = features.getJSONObject(i).getJSONObject("geometry");
             // Grabs array given by coordinate attribute "coordinates: [...,...]"
-            JSONArray coords = geometry.getJSONArray("coordinates");
+            String coordsType = geometry.getString("type");
 
-            // Converts JSONArray type to LatLng type
-            LatLng coord = new LatLng(Double.parseDouble(coords.get(1).toString()), Double.parseDouble(coords.get(0).toString()));
+            if(coordsType.contains("Point"))
+            {
+                JSONArray coords = geometry.getJSONArray("coordinates");
+                LatLng coord = new LatLng(Double.parseDouble(coords.get(1).toString()), Double.parseDouble(coords.get(0).toString()));
 
-            Event e = new Event(coord, title, disasterType);
-            this.events.add(e);
+
+                // Converts JSONArray type to LatLng type
+                Event e = new Event(coord, title, disasterType);
+                this.events.add(e);
+
+            }
         }
     }
 
