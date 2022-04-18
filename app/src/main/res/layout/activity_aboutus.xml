@@ -12,18 +12,18 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="115dp"
         android:scaleType="fitCenter"
+        android:text="Summary"
         android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="Summary" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="165dp"
         android:text="          Disasteye is a Natural Disaster Tracker that utilizes Google Maps API alongside
 NASA's EONET API to generate map markers of real time disaster across the globe. \n\n
 Extra features:\n
@@ -31,26 +31,29 @@ Extra features:\n
         \u2022 Location search bar \n
         \u2022 Marker filter \n"
         android:textSize="20dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="395dp"
+        android:layout_marginTop="440dp"
         android:scaleType="fitCenter"
+        android:text="Credits"
         android:textSize="25dp"
-        android:textFontWeight="10"
-        android:textStyle="bold"
-        android:text="Credits" />
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="435dp"
+        android:layout_marginTop="485dp"
         android:text="
 \u2022 Fire by Bohdan Burmich from \n    NounProject.com\n
-\u2022 Logo font from\n    www.fontspace.com/\n    azonix-font-f30718 \n"
+\u2022 Volcano by Ayub Irawan from \n    NounProject.com\n
+\u2022 Iceberg by Juan Pablo Bravo from \n    NounProject.com\n
+\u2022 Logo font from www.fontspace.com/\n    azonix-font-f30718 \n"
         android:textSize="20dp" />
 
 </RelativeLayout>
