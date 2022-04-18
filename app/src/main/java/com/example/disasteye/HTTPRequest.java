@@ -126,9 +126,10 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
                 // Converts JSONArray type to LatLng type
                 Event e = new Event(coord, title, disasterType);
                 this.events.add(e);
-
             }
+
         }
+
     }
 
     public ArrayList<Event> getEvents(){

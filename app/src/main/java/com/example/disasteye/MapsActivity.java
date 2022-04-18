@@ -69,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     Marker searchMarker = null;
 
+    ArrayList<Event> eventArray = new ArrayList<>();
     ArrayList<Event> wildfireArray = new ArrayList<>();
     ArrayList<Event> volcanoesArray = new ArrayList<>();
     ArrayList<Event> seaLakeArray = new ArrayList<>();
@@ -123,26 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         //Add the coordinates for all our markers.
-        ArrayList<Event> eventArray = request.getEvents();
-        try {
-            for (Event e : eventArray) {
-                if (e.disasterType.toLowerCase().contains("wildfires")) {
-                    wildfireArray.add(e);
-                }
-                else if (e.disasterType.toLowerCase().contains("volcanoes")) {
-                    volcanoesArray.add(e);
-                }
-                else if(e.disasterType.toLowerCase().contains("sealakeice")){
-                    seaLakeArray.add(e);
-                }
-                else if(e.disasterType.toLowerCase().contains("severestorms")){
-                    stormArray.add(e);
-                }
-            }
-        }
-        catch(Exception exception){
-            exception.printStackTrace();
-        }
+        this.eventArray = request.getEvents();
 
         //OnQueryTextListener() -- call backs to changed made in query text: https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -240,26 +222,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mMap = googleMap;
 
+
         try {
-            for (Event event : wildfireArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
-            }
-            for (Event event : volcanoesArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
-            }
-            for(Event event : stormArray){
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_storm)));
-            }
-            for(Event event : seaLakeArray){
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_ice)));
+            for (Event e : eventArray) {
+                if (e.disasterType.toLowerCase().contains("wildfires")) {
+                    Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
+                    wildfireArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                }
+                else if (e.disasterType.toLowerCase().contains("volcanoes")) {
+                    Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
+                    volcanoesArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                }
+                else if(e.disasterType.toLowerCase().contains("sealakeice")){
+                    Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_ice)));
+                    seaLakeArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                }
+                else if(e.disasterType.toLowerCase().contains("severestorms")){
+                    Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_storm)));
+                    stormArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                }
             }
         }
-        catch(Exception except){
-            except.printStackTrace();
+        catch(Exception exception){
+            exception.printStackTrace();
         }
 
         googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
@@ -271,6 +256,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+
+    public void toggleVisible(ArrayList<Event> events)
+    {
+       for(Event e: events)
+       {
+           e.marker.setVisible(false);
+       }
+    }
+
     //Documentation: https://developers.google.com/android/reference/com/google/android/gms/maps/model/package-summary
     //BitmapDescriptor defines our bitmap image.
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId){
