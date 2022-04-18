@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group
-    android:id="@+id/group1"
+    android:id="@+id/navView"
     android:checkableBehavior="single">
     <item
-        android:id="@+id/item1"
-        android:icon="@drawable/ic_filler_24"
-        android:title="Test 1" />
+        android:id="@+id/WildFire"
+        android:icon="@drawable/ic_wild_fire"
+        android:title="WildFire"
+
+        app:actionViewClass="android.widget.CheckBox"
+        />
     <item
-        android:id="@+id/item2"
-        android:icon="@drawable/ic_filler_24"
-        android:title="Test 2" />
+        android:id="@+id/Volcanoes"
+        android:icon="@drawable/ic_volcano"
+        android:title="Volcanoes"
+        app:actionViewClass="android.widget.CheckBox"
+        />
     <item
-        android:id="@+id/item3"
-        android:icon="@drawable/ic_filler_24"
-        android:title="Test 3" />
+        android:id="@+id/Iceberg"
+        android:icon="@drawable/ic_ice"
+        android:title="Iceberg"
+        app:actionViewClass="android.widget.CheckBox"
+        />
+    <item
+        android:id="@+id/Tornadoes"
+        android:icon="@drawable/ic_storm"
+        android:title="Tornadoes"
+        app:actionViewClass="android.widget.CheckBox"
+        />
+
     </group>
 
     </menu>

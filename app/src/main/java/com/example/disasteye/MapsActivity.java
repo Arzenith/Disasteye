@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.disasteye.databinding.ActivityMapsBinding;
@@ -68,10 +70,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker searchMarker = null;
 
     ArrayList<Event> wildfireArray = new ArrayList<>();
-    ArrayList<Event> floodArray = new ArrayList<>();
-    ArrayList<Event> droughtArray = new ArrayList<>();
-    ArrayList<Event> earthquakeArray = new ArrayList<>();
     ArrayList<Event> volcanoesArray = new ArrayList<>();
+    ArrayList<Event> seaLakeArray = new ArrayList<>();
+    ArrayList<Event> stormArray = new ArrayList<>();
 
     private ConstraintLayout bottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -104,7 +105,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //Request will receive a URL and gather data from the API!
-        String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires";
+        String link = "https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,seaLakeIce,severeStorms";
+
         HTTPRequest request = new HTTPRequest();
         try {
             request.execute(link).get();
@@ -128,14 +130,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (e.disasterType.toLowerCase().contains("wildfires")) {
                     wildfireArray.add(e);
                 }
-                else if (e.disasterType.toLowerCase().contains("floods")) {
-                    floodArray.add(e);
-                } else if (e.disasterType.contains("drought")) {
-                    droughtArray.add(e);
-                } else if (e.disasterType.contains("earthquakes")) {
-                    earthquakeArray.add(e);
-                } else if (e.disasterType.contains("volcanoes")) {
+                else if (e.disasterType.toLowerCase().contains("volcanoes")) {
                     volcanoesArray.add(e);
+                }
+                else if(e.disasterType.toLowerCase().contains("seaLakeIce")){
+                    seaLakeArray.add(e);
+                }
+                else if(e.disasterType.toLowerCase().contains("severeStorms")){
+                    stormArray.add(e);
                 }
             }
         }
@@ -224,20 +226,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(intent);
     }
 
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap googleMap) {
+        try {
+        // Customise the styling of the base map using a JSON object defined
+        // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
+
+                if (!success) {
+                    Log.e(null, "Style parsing failed.");
+                }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
         mMap = googleMap;
 
         try {
@@ -245,21 +248,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
             }
-            for (Event event : droughtArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_drought)));
-            }
-            for (Event event : floodArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_flood)));
-            }
-            for (Event event : earthquakeArray) {
-                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_earthquake)));
-            }
             for (Event event : volcanoesArray) {
                 mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
+            }
+            for(Event event : stormArray){
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_storm)));
+            }
+            for(Event event : seaLakeArray){
+                mMap.addMarker(new MarkerOptions().position(event.coords).title(event.title)
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_ice)));
             }
         }
         catch(Exception except){
@@ -285,6 +284,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
-
     }
 }
