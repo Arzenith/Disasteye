@@ -133,10 +133,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else if (e.disasterType.toLowerCase().contains("volcanoes")) {
                     volcanoesArray.add(e);
                 }
-                else if(e.disasterType.toLowerCase().contains("seaLakeIce")){
+                else if(e.disasterType.toLowerCase().contains("sealakeice")){
                     seaLakeArray.add(e);
                 }
-                else if(e.disasterType.toLowerCase().contains("severeStorms")){
+                else if(e.disasterType.toLowerCase().contains("severestorms")){
                     stormArray.add(e);
                 }
             }
@@ -213,8 +213,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MaterialToolbar TopAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
-                TopAppBar.setVisibility(View.GONE);
                 openAboutUs();
             }
         });

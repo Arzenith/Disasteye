@@ -34,7 +34,7 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
         try
         {
             // ESTABLISHING CONNECTION BETWEEN API
-            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,drought,floods,earthquakes,volcanoes");
+            URL url = new URL("https://eonet.gsfc.nasa.gov/api/v3/events/geojson?category=wildfires,volcanoes,severeStorms");
             connection = (HttpsURLConnection) url.openConnection();
 
             // Setting up connection
@@ -118,7 +118,6 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
 
             // Converts JSONArray type to LatLng type
             LatLng coord = new LatLng(Double.parseDouble(coords.get(1).toString()), Double.parseDouble(coords.get(0).toString()));
-
 
             Event e = new Event(coord, title, disasterType);
             this.events.add(e);
