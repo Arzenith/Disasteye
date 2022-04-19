@@ -11,6 +11,7 @@
 - [ ] &nbsp;💲&nbsp;&nbsp;&nbsp;&nbsp;Donate link
 - [ ] 🌐&nbsp;&nbsp;&nbsp;News about disaster
 - [ ] 🕵️‍♂️&nbsp;&nbsp;&nbsp;Details about current disaster
+- [ ] ⚙&nbsp;&nbsp;&nbsp;Settings Page
 
 ## Screenshots
 ![](images/Disasteye_SS_1.png)![](images/Disasteye_SS_2.png)![](images/Disasteye_SS_3.png)
