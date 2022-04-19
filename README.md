@@ -13,7 +13,7 @@
 - [ ] ⚙&nbsp;&nbsp;&nbsp;Settings Page
 
 ## Screenshots
-![](images/Disasteye_SS_1.png)![](images/Disasteye_SS_2.png)![](images/Disasteye_SS_3.png)
+![](images/Disasteye_SS_1.png)![](images/Disasteye_SS_2_2.0.png)![](images/Disasteye_SS_3_2.0.png)
 
 ### Credits
 Fire by Bohdan Burmich from NounProject.com
