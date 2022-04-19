@@ -193,14 +193,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         );
+        //Working on navigation view checkboxes.
         NavigationView navigation = findViewById(R.id.navigationView);
 
-        MenuItem menuItem = navigation.getMenu().findItem(R.id.WildFire);
-        CompoundButton checkBox =  (CompoundButton) menuItem.getActionView();
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        //menuItems of events in nav view
+        ArrayList<MenuItem> menuItemsArray= new ArrayList<>();
+        menuItemsArray.add(navigation.getMenu().findItem(R.id.WildFire));
+        menuItemsArray.add(navigation.getMenu().findItem(R.id.Volcanoes));
+        menuItemsArray.add(navigation.getMenu().findItem(R.id.Iceberg));
+        menuItemsArray.add(navigation.getMenu().findItem(R.id.Tornadoes));
+
+        //The buttons to those menu items
+        CompoundButton fireBox =  (CompoundButton) menuItemsArray.get(0).getActionView();
+        CompoundButton volcanoBox =  (CompoundButton) menuItemsArray.get(1).getActionView();
+        CompoundButton iceBox =  (CompoundButton) menuItemsArray.get(2).getActionView();
+        CompoundButton stormBox =  (CompoundButton) menuItemsArray.get(3).getActionView();
+
+        //And when the buttons get clicked:
+        fireBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 toggleVisible(wildfireArray);
+            }
+        });
+        volcanoBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
+                toggleVisible(volcanoesArray);
+            }
+        });
+        iceBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
+                toggleVisible(seaLakeArray);
+            }
+        });
+        stormBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
+                toggleVisible(stormArray);
             }
         });
 
