@@ -8,6 +8,7 @@
     tools:context=".aboutus">
 
     <TextView
+        android:id="@+id/summary"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -44,6 +45,7 @@ Extra features:\n
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/credittxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -55,5 +57,16 @@ Extra features:\n
 \u2022 Iceberg by Juan Pablo Bravo from \n    NounProject.com\n
 \u2022 Logo font from www.fontspace.com/\n    azonix-font-f30718 \n"
         android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="back"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/credittxt"
+        android:onClick="btnBack"/>
+
 
 </RelativeLayout>

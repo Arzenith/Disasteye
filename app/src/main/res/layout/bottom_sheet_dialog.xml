@@ -22,13 +22,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/swiper"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_remove_24"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"></ImageView>
+
+            <ImageView
+                android:id="@+id/swiper"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_remove_24"></ImageView>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
