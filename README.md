@@ -1,4 +1,3 @@
-
 ![](images/Disastye_Logo.png)
 
 ## What is Disasteye?
