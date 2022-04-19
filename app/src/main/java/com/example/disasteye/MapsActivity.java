@@ -21,12 +21,17 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -46,6 +51,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -86,7 +92,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setMaxHeight(1800);
@@ -188,6 +193,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
         );
+        NavigationView navigation = findViewById(R.id.navigationView);
+
+        MenuItem menuItem = navigation.getMenu().findItem(R.id.WildFire);
+        CompoundButton checkBox =  (CompoundButton) menuItem.getActionView();
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
+                toggleVisible(wildfireArray);
+            }
+        });
 
         //About us button
         aboutUs = (ImageButton) findViewById(R.id.aboutus);
@@ -214,14 +229,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             boolean success = googleMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
 
-                if (!success) {
-                    Log.e(null, "Style parsing failed.");
-                }
+            if (!success) {
+                Log.e(null, "Style parsing failed.");
+            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
         mMap = googleMap;
-
 
         try {
             for (Event e : eventArray) {
@@ -261,7 +275,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
        for(Event e: events)
        {
-           e.marker.setVisible(false);
+           if(e.marker.isVisible()){
+               e.marker.setVisible(false);
+           }
+           else{
+               e.marker.setVisible(true);
+           }
        }
     }
 

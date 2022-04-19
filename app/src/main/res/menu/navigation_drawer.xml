@@ -9,7 +9,6 @@
         android:id="@+id/WildFire"
         android:icon="@drawable/ic_wild_fire"
         android:title="WildFire"
-
         app:actionViewClass="android.widget.CheckBox"
         />
     <item
