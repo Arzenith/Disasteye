@@ -1,4 +1,4 @@
-![](images/Disasteye_Logo.png)
+![](images/Disasteye_Logo_Trim.png)
 
 ## What is Disasteye?
 "Disasteye" is a Natural Disaster Event Tracker android app that provides an aestethic way to visualize natural disasters around the world in real time. Disasteye utilizes both NASA's Earth Observatory Natural Event Tracker (EONET) API and Google Maps for a majority of it's functionality. 
