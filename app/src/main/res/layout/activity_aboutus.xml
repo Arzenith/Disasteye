@@ -5,15 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
-    tools:context=".aboutus">
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="75dp"
-        android:text="Back" />
+    tools:context=".aboutus"
+    android:id="@+id/relativeAbout">
 
     <TextView
         android:id="@+id/summary"
@@ -70,11 +63,10 @@ Extra features:\n
         android:id="@+id/backbutton"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:text="back"
-        android:textColor="#000"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/credittxt"
-        android:onClick="btnBack"/>
+        android:layout_centerHorizontal="true"
+        android:text="back"
+        android:textColor="#000" />
 
 
 </RelativeLayout>
