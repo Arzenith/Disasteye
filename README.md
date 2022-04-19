@@ -15,3 +15,12 @@
 
 ## Screenshots
 ![](images/Disasteye_SS_1.png)![](images/Disasteye_SS_2.png)![](images/Disasteye_SS_3.png)
+
+### Credits
+Fire by Bohdan Burmich from NounProject.com
+
+Volcano by Ayub Irawan from NounProject.com
+
+Iceberg by Juan Pablo Bravo from NounProject.com
+
+Logo font from https://www.fontspace.com/azonix-font-f30718
