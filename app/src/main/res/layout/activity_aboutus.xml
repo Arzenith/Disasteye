@@ -7,7 +7,16 @@
     android:layout_marginTop="0dp"
     tools:context=".aboutus">
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="75dp"
+        android:text="Back" />
+
     <TextView
+        android:id="@+id/summary"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -25,11 +34,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="165dp"
         android:text="          Disasteye is a Natural Disaster Tracker that utilizes Google Maps API alongside
-NASA's EONET API to generate map markers of real time disaster across the globe. \n\n
+NASA's EONET API to generate map markers of real time disasters across the globe. \n\n
 Extra features:\n
         \u2022 News module \n
         \u2022 Location search bar \n
-        \u2022 Marker filter \n"
+        \u2022 Marker filters \n"
         android:textSize="20dp" />
 
     <TextView
@@ -44,6 +53,7 @@ Extra features:\n
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/credittxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -55,5 +65,16 @@ Extra features:\n
 \u2022 Iceberg by Juan Pablo Bravo from \n    NounProject.com\n
 \u2022 Logo font from www.fontspace.com/\n    azonix-font-f30718 \n"
         android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="back"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/credittxt"
+        android:onClick="btnBack"/>
+
 
 </RelativeLayout>
