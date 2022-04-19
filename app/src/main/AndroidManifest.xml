@@ -16,7 +16,7 @@
             android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${ND_KEY}" />
+            android:value="${GMP_KEY}" />
 
         <activity
             android:name=".MapsActivity"
