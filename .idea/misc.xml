@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_ice.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_logo_disasteye.xml" value="0.1275" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_menu_24dp.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/drawable/ic_storm.xml" value="0.1" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/menu/my_navigation_items.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/menu/navigation_drawer.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
         <entry key="..\:/Users/patri/AndroidStudioProjects/Disasteye/app/src/main/res/layout/activity_maps.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1075" />
