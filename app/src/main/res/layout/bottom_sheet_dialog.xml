@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,11 +10,14 @@
     app:behavior_peekHeight="62dp"
     style="@style/Widget.Material3.BottomSheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="#1C1C1C">
+        android:background="#1C1C1C"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:id="@+id/header_layout"
             android:layout_width="0dp"
@@ -23,13 +27,75 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/swiper"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_baseline_remove_24"></ImageView>
-    </LinearLayout>
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="168dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="9dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_remove_24" />
+
+        <TextView
+            android:id="@+id/bottomsheeteventtitle"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="200dp"
+            android:text="title"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/bottomsheeteventcoordinates"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="150dp"
+            android:text="coordinates"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/bottomsheeteventtype"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="100dp"
+            android:text="disaster type"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            />
+
+        <ImageView
+            android:id="@+id/bottomsheeteventlogo"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginBottom="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_wild_fire"/>
+
+
+    </FrameLayout>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

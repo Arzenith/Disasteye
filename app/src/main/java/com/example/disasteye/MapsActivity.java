@@ -50,6 +50,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -110,44 +111,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Code for pulling database values out. Ignore out.
 
-//        ArrayList<String> news_headline  = new ArrayList<String>();
-//        ArrayList<String> news_link = new ArrayList<String>();
-//
-//        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Canada WILDFIRE");
-//
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot)
-//            {
-//                String news;
-//                String link;
-//                for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
-//                {
-//                    news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
-//                    System.out.println(news);
-//                    news_headline.add(news);
-//                    link = unique_id.child("Link").getValue(String.class);
-//                    System.out.println(link);
-//                    news_link.add(link);
-//
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+          ArrayList<String> news_headline  = new ArrayList<String>();
+        ArrayList<String> news_link = new ArrayList<String>();
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Canada WILDFIRE");
+
+       myRef.addValueEventListener(new ValueEventListener() {
+           @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+              String news; String link;
+                for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
+                {
+                    news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
+                    System.out.println(news);
+                    news_headline.add(news);
+                    link = unique_id.child("Link").getValue(String.class);
+                    System.out.println(link);
+                    news_link.add(link);
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+       });
 
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setMaxHeight(1800);
+        bottomSheetBehavior.setMaxHeight(1750);
         bottomSheetBehavior.setPeekHeight(200);
         bottomSheetBehavior.setHideable(false);
         headerLayout = findViewById(R.id.header_layout);
-        swiper = findViewById(R.id.swiper);
 
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -158,6 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
             }
         });
+
 
         //Request will receive a URL and gather data from the API!
 
@@ -292,6 +292,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 openAboutUs();
             }
         });
+
+
     }
 
     //Function to bring up the about us page
@@ -353,6 +355,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                String markerName = marker.getTitle();
+                LatLng markerCoords = marker.getPosition();
+                TextView title = findViewById(R.id.bottomsheeteventtitle);
+                TextView coordinates = findViewById(R.id.bottomsheeteventcoordinates);
+                TextView disastertype = findViewById(R.id.bottomsheeteventtype);
+                ImageView img = findViewById(R.id.bottomsheeteventlogo);
+
+                Event e = null;
+                for(int i =0;i<eventArray.size();i++){
+                    e = eventArray.get(i);
+                    if(markerName.equals(e.title)){
+                        break;
+                    }
+                }
+
+                title.setText(markerName);
+                coordinates.setText(markerCoords.toString());
+                disastertype.setText(e.disasterType);
+
+                if(e.disasterType.equals("wildfires")){
+                    img.setImageResource(R.drawable.ic_wild_fire);
+                }
+                else if(e.disasterType.equals("volcanoes")){
+                    img.setImageResource(R.drawable.ic_volcano);
+                }
+                else if(e.disasterType.equals("seaLakeIce")){
+                    img.setImageResource(R.drawable.ic_ice);
+                }
+                else if(e.disasterType.equals("severeStorms")){
+                    img.setImageResource(R.drawable.ic_storm);
+                }
+
+                return false;
+            }
+        });
     }
 
     public void toggleVisible(ArrayList<Event> events)

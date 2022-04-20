@@ -17,13 +17,15 @@
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/ejobe/AndroidStudioProjects/Disasteye/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
         <entry key="..\:/Users/patri/AndroidStudioProjects/Disasteye/app/src/main/res/layout/activity_maps.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable/ic_storm.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.247" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.17" />
         <entry key="app/src/main/res/layout/aboutus.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_aboutus.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.45925925925925926" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.28489583333333335" />
       </map>
