@@ -270,21 +270,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         try {
             for (Event e : eventArray) {
-                if (e.disasterType.toLowerCase().contains("wildfires")) {
+                if (e.disasterType.toLowerCase().contains("wildfires"))
+                {
                     Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_wild_fire)));
-                    wildfireArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                    wildfireArray.add(new Event(e.coords, e.title, e.disasterType, e.date, temp));
                 }
-                else if (e.disasterType.toLowerCase().contains("volcanoes")) {
+                else if (e.disasterType.toLowerCase().contains("volcanoes"))
+                {
                     Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_volcano)));
-                    volcanoesArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                    volcanoesArray.add(new Event(e.coords, e.title, e.disasterType, e.date, temp));
                 }
-                else if(e.disasterType.toLowerCase().contains("sealakeice")){
+                else if(e.disasterType.toLowerCase().contains("sealakeice"))
+                {
                     Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_ice)));
-                    seaLakeArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                    seaLakeArray.add(new Event(e.coords, e.title, e.disasterType, e.date, temp));
                 }
-                else if(e.disasterType.toLowerCase().contains("severestorms")){
+                else if(e.disasterType.toLowerCase().contains("severestorms"))
+                {
                     Marker temp = mMap.addMarker(new MarkerOptions().position(e.coords).title(e.title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_storm)));
-                    stormArray.add(new Event(e.coords, e.title, e.disasterType, temp));
+                    stormArray.add(new Event(e.coords, e.title, e.disasterType, e.date, temp));
                 }
             }
         }
@@ -295,8 +299,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
-                System.out.println(mMap.getCameraPosition().target.latitude);
-                System.out.println(mMap.getCameraPosition().target.longitude);
+//                System.out.println(mMap.getCameraPosition().target.latitude);
+//                System.out.println(mMap.getCameraPosition().target.longitude);
             }
         });
 

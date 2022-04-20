@@ -104,6 +104,16 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
             JSONObject properties = features.getJSONObject(i).getJSONObject("properties");
             // Grabs title string for event: "title: 'TITLE'"
             String title = properties.getString("title");
+            String date;
+            if(properties.has("date"))
+            {
+                date = properties.getString("date");
+            }
+            else{
+                date = "N/A";
+            }
+
+            System.out.println(date);
 
             // Grabs categories array in features array "categories: {...}"
             JSONArray categories = properties.getJSONArray("categories");
@@ -122,14 +132,11 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
                 JSONArray coords = geometry.getJSONArray("coordinates");
                 LatLng coord = new LatLng(Double.parseDouble(coords.get(1).toString()), Double.parseDouble(coords.get(0).toString()));
 
-
                 // Converts JSONArray type to LatLng type
-                Event e = new Event(coord, title, disasterType);
+                Event e = new Event(coord, title, disasterType, date);
                 this.events.add(e);
             }
-
         }
-
     }
 
     public ArrayList<Event> getEvents(){

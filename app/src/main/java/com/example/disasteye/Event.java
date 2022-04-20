@@ -9,20 +9,23 @@ public class Event {
     public String title;
     public String disasterType;
     public Marker marker;
+    public String date;
 
 
-    public Event (LatLng coords, String title, String disasterType)
+    public Event (LatLng coords, String title, String disasterType, String date)
     {
         this.coords = coords;
         this.title = title;
         this.disasterType = disasterType;
+        this.date = date;
     }
 
-    public Event (LatLng coords, String title, String disasterType, Marker marker)
+    public Event (LatLng coords, String title, String disasterType, String date, Marker marker)
     {
         this.coords = coords;
         this.title = title;
         this.disasterType = disasterType;
+        this.date = date;
         this.marker = marker;
     }
 
@@ -32,6 +35,6 @@ public class Event {
     }
 
     @Override public String toString() {
-        return "Title: " + title + " Disaster: " + disasterType +  " Coordinates: " + coords +"\n";
+        return "Title: " + title + " Disaster: " + disasterType +  " Coordinates: " + coords +"\n" + " Date: " + date;
     }
 }
