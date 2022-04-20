@@ -373,6 +373,113 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
 
+                //Parse title
+                //Get the country name
+                //If not country name , return  recent disaster
+                String result = markerName.substring(markerName.lastIndexOf(',') + 1).trim();
+                System.out.println(result+"\n");
+                System.out.println(markerName);
+
+                String key;
+
+                //Parse the tile for querying it to the database. Currently , based on extracting name
+                // out of title. For future , trying to map coordinate to place/state.
+
+                if (result.equals("United States"))
+                {
+                    String[] arr = markerName.split(",");
+                    try
+                    {
+                        key = arr[arr.length-2];
+//                        System.out.println(arr[arr.length-2]);
+                    }
+                    catch (Exception err)
+                    {
+                        key = "RECENT";
+//                        System.out.println("Error");
+                    }
+                }
+                else if(result.contains(" - United States"))
+                {
+//                    System.out.println("Success");
+                    String[] arr = markerName.split(",");
+                    String last;
+                    try
+                    {
+                        last = arr[arr.length-1];
+
+                    }
+                    catch (Exception err)
+                    {
+                        last = "Recent" ;
+//                        System.out.println("Error");
+                    }
+
+                    String[] arr_2 = last.split("-");
+                    key = arr_2[0];
+//                    System.out.println(key + "SUCCESS \n");
+
+                }
+                else
+                {
+                    String[] arr = markerName.split(",");
+                    //IF BRIGHTON HOVE - uNITED kINGDOM
+                    if(arr[arr.length-1].contains("-"))
+                    {
+                        //get value after -
+                        try
+                        {
+                            String[] splitIntoTwo = arr[arr.length-1].split("-");
+                            key = splitIntoTwo[splitIntoTwo.length-1];
+//                            System.out.println(key + "SUCCESS");
+
+                        }
+                        catch (Exception err)
+                        {
+                            key = "Recent";
+                        }
+
+
+                    }
+                    else
+                    {
+
+                        try
+                        {
+                            key = arr[arr.length-1];
+
+                        }
+                        catch (Exception err)
+                        {
+                            key = "Recent";
+                        }
+
+                    }
+
+
+
+                }
+
+
+                System.out.println("The key for the current class is " + key + " " + e.disasterType + "\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 title.setText(markerName);
                 coordinates.setText(markerCoords.toString());
                 disastertype.setText(e.disasterType);
