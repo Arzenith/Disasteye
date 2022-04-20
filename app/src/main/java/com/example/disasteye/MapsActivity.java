@@ -110,14 +110,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
 
         //Code for pulling database values out. Ignore out.
-
-          ArrayList<String> news_headline  = new ArrayList<String>();
+        ArrayList<String> news_headline  = new ArrayList<String>();
         ArrayList<String> news_link = new ArrayList<String>();
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Canada WILDFIRE");
 
-       myRef.addValueEventListener(new ValueEventListener() {
-           @Override
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
               String news; String link;
@@ -136,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-       });
+        });
 
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());

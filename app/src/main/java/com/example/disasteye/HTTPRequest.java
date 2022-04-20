@@ -113,8 +113,6 @@ public class HTTPRequest extends AsyncTask<String, Integer, String> {
                 date = "N/A";
             }
 
-            System.out.println(date);
-
             // Grabs categories array in features array "categories: {...}"
             JSONArray categories = properties.getJSONArray("categories");
             // Grabs the first object in the categories array "{...}"
