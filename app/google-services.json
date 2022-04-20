@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "83081931953",
+    "firebase_url": "https://wildfirenewsrealtime-default-rtdb.firebaseio.com",
+    "project_id": "wildfirenewsrealtime",
+    "storage_bucket": "wildfirenewsrealtime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83081931953:android:044a9ca326588a67c40690",
+        "android_client_info": {
+          "package_name": "com.example.disasteye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOpupylgAXeTXEku0qdS4UfYXjmQA42VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83081931953:android:61a1939cfa17a384c40690",
+        "android_client_info": {
+          "package_name": "com.example.pull_from_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOpupylgAXeTXEku0qdS4UfYXjmQA42VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83081931953:android:f95a4cc52abaf9c2c40690",
+        "android_client_info": {
+          "package_name": "com.example.pull_google_news_from_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOpupylgAXeTXEku0qdS4UfYXjmQA42VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83081931953-2sk4mf63a2irnhpr2h89nu482gkmg64a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

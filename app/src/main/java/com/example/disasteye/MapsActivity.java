@@ -1,4 +1,20 @@
 package com.example.disasteye;
+//package com.example.pull_google_news_from_firebase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -65,6 +81,8 @@ import java.util.concurrent.ExecutionException;
 import org.json.JSONObject;
 
 
+
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     public MapsActivity(){
 
@@ -89,6 +107,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Code for pulling database values out. Ignore out.
+
+//        ArrayList<String> news_headline  = new ArrayList<String>();
+//        ArrayList<String> news_link = new ArrayList<String>();
+//
+//        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Canada WILDFIRE");
+//
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot)
+//            {
+//                String news;
+//                String link;
+//                for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
+//                {
+//                    news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
+//                    System.out.println(news);
+//                    news_headline.add(news);
+//                    link = unique_id.child("Link").getValue(String.class);
+//                    System.out.println(link);
+//                    news_link.add(link);
+//
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
