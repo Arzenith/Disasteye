@@ -109,33 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Code for pulling database values out. Ignore out.
-        ArrayList<String> news_headline  = new ArrayList<String>();
-        ArrayList<String> news_link = new ArrayList<String>();
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Canada WILDFIRE");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-              String news; String link;
-                for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
-                {
-                    news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
-                    System.out.println(news);
-                    news_headline.add(news);
-                    link = unique_id.child("Link").getValue(String.class);
-                    System.out.println(link);
-                    news_link.add(link);
-
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
@@ -417,6 +391,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     String[] arr_2 = last.split("-");
                     key = arr_2[0];
+                    key = key.substring(0,key.length()-1);
 //                    System.out.println(key + "SUCCESS \n");
 
                 }
@@ -460,8 +435,53 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 }
 
+                key = key  +" "+e.disasterType;
+                key = key.substring(1,key.length());
+                System.out.println("The key for the current class is" + key + "\n");
 
-                System.out.println("The key for the current class is " + key + " " + e.disasterType + "\n");
+
+
+
+                //Code for pulling database values out. Ignore out.
+                final ArrayList<String> news_headline  = new ArrayList<String>();
+                final ArrayList<String> news_link = new ArrayList<String>();
+
+
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(key);
+
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot)
+                    {
+                        String news; String link;
+                        news_headline.clear();
+                        news_link.clear();
+                        for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
+                        {
+                            news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
+                            System.out.println(news);
+                            news_headline.add(news);
+                            link = unique_id.child("Link").getValue(String.class);
+                            System.out.println(link);
+                            news_link.add(link);
+
+                        }
+                        //note news_headline , news_link only exist inside this class.
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+//                //Print news value
+//                System.out.println("Trying to print stuff");
+//                for (int i=0; i<news_headline.size();i++)
+//                {
+//                    System.out.println(news_headline.get(i));
+//                    System.out.println(news_link.get(i));
+//                }
 
 
 
