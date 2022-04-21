@@ -42,6 +42,9 @@ public class Event {
 
         String coordinates = coords.toString();
         String formattedCoords = coordinates.replaceFirst("lat/lng: ", "");
+        String[] arr = formattedCoords.split("[,]",0);
+        // adding space after the comma
+        formattedCoords = arr[0] + ", " + arr[1];
 
         return formattedCoords;
     }
