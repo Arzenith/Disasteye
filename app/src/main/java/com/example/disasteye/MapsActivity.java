@@ -4,6 +4,7 @@ package com.example.disasteye;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -80,8 +81,7 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
-
-
+import org.w3c.dom.Text;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -364,16 +364,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        TextView descripTitle = findViewById(R.id.bottomsheeteventtitle);
+        descripTitle.setVisibility(View.INVISIBLE);
+        TextView typeTitle = findViewById(R.id.bottomsheeteventtypetitle);
+        typeTitle.setVisibility(View.INVISIBLE);
+        TextView coordTitle = findViewById(R.id.bottomsheetcoordtitle);
+        coordTitle.setVisibility(View.INVISIBLE);
+        TextView dateTitle = findViewById(R.id.bottomsheetdatetitle);
+        dateTitle.setVisibility(View.INVISIBLE);
+        TextView newsTitle = findViewById(R.id.bottomsheetnewstitle);
+        newsTitle.setVisibility(View.INVISIBLE);
+        ListView newss = findViewById(R.id.newslistview);
+        newss.setVisibility(View.INVISIBLE);
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
                 String markerName = marker.getTitle();
                 LatLng markerCoords = marker.getPosition();
-                TextView title = findViewById(R.id.bottomsheeteventtitle);
-                TextView coordinates = findViewById(R.id.bottomsheeteventcoordinates);
+                TextView title = findViewById(R.id.bottomsheetevent);
+                TextView coordinates = findViewById(R.id.bottomsheetcoords);
                 TextView disastertype = findViewById(R.id.bottomsheeteventtype);
+                TextView date = findViewById(R.id.bottomsheetdates);
                 ImageView img = findViewById(R.id.bottomsheeteventlogo);
+
+                descripTitle.setVisibility(View.VISIBLE);
+                descripTitle.setPaintFlags(descripTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                typeTitle.setVisibility(View.VISIBLE);
+                typeTitle.setPaintFlags(typeTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                coordTitle.setVisibility(View.VISIBLE);
+                coordTitle.setPaintFlags(coordTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                dateTitle.setVisibility(View.VISIBLE);
+                dateTitle.setPaintFlags(dateTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                newsTitle.setVisibility(View.VISIBLE);
+                newsTitle.setPaintFlags(newsTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+                newss.setVisibility(View.VISIBLE);
 
                 Event e = null;
                 for(int i =0;i<eventArray.size();i++){
@@ -475,13 +501,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 key = key.substring(1,key.length());
                 System.out.println("The key for the current class is" + key + "\n");
 
-
-
-
                 //Code for pulling database values out. Ignore out.
-                final ArrayList<String> news_headline  = new ArrayList<String>();
-                final ArrayList<String> news_link = new ArrayList<String>();
-
+                 ArrayList<String> news_headline  = new ArrayList<String>();
+                 ArrayList<String> news_link = new ArrayList<>();
 
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(key);
 
@@ -500,7 +522,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             link = unique_id.child("Link").getValue(String.class);
                             System.out.println(link);
                             news_link.add(link);
-
+                            ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
+                            newss.setAdapter(arrayAdapter);
                         }
                         //note news_headline , news_link only exist inside this class.
 
@@ -519,26 +542,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    System.out.println(news_link.get(i));
 //                }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 title.setText(markerName);
                 coordinates.setText(markerCoords.toString());
                 disastertype.setText(e.disasterType);
+                date.setText(e.date);
 
                 if(e.disasterType.equals("wildfires")){
                     img.setImageResource(R.drawable.ic_wild_fire);
