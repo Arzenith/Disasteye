@@ -470,7 +470,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 else {
                     String[] arr = markerName.split(",");
-                    //IF BRIGHTON HOVE - uNITED kINGDOM
+                    //IF BRIGHTON HOVE - UNITED KINGDOM
                     if(arr[arr.length-1].contains("-")) {
                         //get value after -
                         try {
@@ -499,6 +499,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Code for pulling database values out. Ignore out.
                 ArrayList<String> news_headline  = new ArrayList<String>();
                 ArrayList<String> news_link = new ArrayList<>();
+                final String google_search_key =   markerName.toLowerCase().replace(" " , "+");;
 
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(key);
 
@@ -508,17 +509,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String news; String link;
                         news_headline.clear();
                         news_link.clear();
-                        for  (DataSnapshot unique_id : snapshot.getChildren()) { //Iterate through the child node and the unique id
-                            news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
-                           //System.out.println(news);
-                            news_headline.add(news);
-                            link = unique_id.child("Link").getValue(String.class);
-                            //System.out.println(link);
-                            news_link.add(link);
+                        if((snapshot.exists()))
+                        {
+                            for  (DataSnapshot unique_id : snapshot.getChildren()) { //Iterate through the child node and the unique id
+                                news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
+                                System.out.println(news);
+                                //Check if news is relevant.
+                                news_headline.add(news);
+                                link = unique_id.child("Link").getValue(String.class);
+                                System.out.println(link);
+                                news_link.add(link);
+                                News newwws = new News(MapsActivity.this,news_headline,news_link);
+                                //ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
+                                newss.setAdapter(newwws);
+
+
+
+                            }
+
+                        }
+                        else
+                        {
+                            //Idea for future: If no snapshot , try to add to firebase for future references.
+                            news_headline.add("Click for Relevant News");
+
+                            news_link.add("https://www.google.com/search?q="+google_search_key+"ress+abc&source=lmns&tbm=nws&bih=665&biw=1309&rlz=1C5CHFA_enNP906NP906&hl=en&sa=X&ved=2ahUKEwiltsSFkqb3AhUEA50JHSxmAIsQ_AUoAnoECAEQAg");
                             News newwws = new News(MapsActivity.this,news_headline,news_link);
-                            //ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
                             newss.setAdapter(newwws);
                         }
+
                         //note news_headline , news_link only exist inside this class.
 
                     }
