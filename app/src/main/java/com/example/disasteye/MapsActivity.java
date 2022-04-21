@@ -231,29 +231,65 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CompoundButton iceBox =  (CompoundButton) menuItemsArray.get(2).getActionView();
         CompoundButton stormBox =  (CompoundButton) menuItemsArray.get(3).getActionView();
 
+        //Each box is true by default:
+        fireBox.setChecked(true);
+        volcanoBox.setChecked(true);
+        iceBox.setChecked(true);
+        stormBox.setChecked(true);
+
+        //And the icons by default are checked.
+        fireBox.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+        volcanoBox.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+        iceBox.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+        stormBox.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+
         //And when the buttons get clicked:
         fireBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 toggleVisible(wildfireArray);
+                if(isChecked == true){
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+                }
+                else{
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_outline_blank_24);
+                }
             }
         });
         volcanoBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 toggleVisible(volcanoesArray);
+                if(isChecked == true){
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+                }
+                else{
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_outline_blank_24);
+                }
             }
         });
         iceBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 toggleVisible(seaLakeArray);
+                if(isChecked == true){
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+                }
+                else{
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_outline_blank_24);
+                }
             }
         });
         stormBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
                 toggleVisible(stormArray);
+                if(isChecked == true){
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_24);
+                }
+                else{
+                    buttonView.setButtonDrawable(R.drawable.ic_baseline_check_box_outline_blank_24);
+                }
             }
         });
 
