@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Disasteye">
         <activity
+            android:name=".appsettings"
+            android:exported="false" />
+        <activity
             android:name=".aboutus"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${GMP_KEY}" />

@@ -22,15 +22,17 @@
         <entry key="app/src/main/res/drawable/ic_baseline_crop_square_24.xml" value="0.1615" />
         <entry key="app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1075" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1075" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_storm.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/newsboxlayout.xml" value="0.1615" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.247" />
         <entry key="app/src/main/res/drawable/rounded.xml" value="0.17" />
         <entry key="app/src/main/res/layout/aboutus.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_aboutus.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/listviewitem.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_appsettings.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/listviewitem.xml" value="0.1" />
         <entry key="app/src/main/res/layout/listviewtextcolor.xml" value="0.24375" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.28489583333333335" />
       </map>

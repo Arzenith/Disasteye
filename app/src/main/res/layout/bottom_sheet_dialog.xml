@@ -68,8 +68,8 @@
             android:layout_marginBottom="200dp"
             android:text="Description"
             android:textColor="#98f5ff"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
             />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_marginBottom="140dp"
             android:textColor="#98f5ff"
             android:textSize="17sp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/montserrat_semibold"
             />
 
         <TextView
@@ -94,8 +94,8 @@
             android:layout_marginBottom="200dp"
             android:text="Event Type"
             android:textColor="#ace1af"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
             />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_marginBottom="165dp"
             android:textColor="#ace1af"
             android:textSize="17sp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/montserrat_semibold"
             />
 
         <ImageView
@@ -129,8 +129,8 @@
             android:layout_marginLeft="25dp"
             android:text="Coordinates"
             android:textColor="#f4c2c2"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
             />
 
         <TextView
@@ -143,7 +143,7 @@
             android:layout_marginLeft="16dp"
             android:textColor="#f4c2c2"
             android:textSize="17sp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/montserrat_semibold"
             />
 
         <TextView
@@ -155,8 +155,8 @@
             android:layout_marginBottom="70dp"
             android:text="Start Date"
             android:textColor="#eed5b7"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
             />
 
         <TextView
@@ -168,7 +168,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="#eed5b7"
             android:textSize="17sp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/montserrat_semibold"
             />
 
         <TextView
@@ -181,8 +181,8 @@
             android:layout_marginLeft="10dp"
             android:text="Relevant News"
             android:textColor="#c1c1ff"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
             />
 
         <RelativeLayout

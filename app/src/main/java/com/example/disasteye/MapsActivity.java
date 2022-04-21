@@ -106,6 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LinearLayout headerLayout;
     private ImageView swiper;
     private ImageButton aboutUs;
+    private ImageButton settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,6 +304,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        //Settings button
+        settings = (ImageButton) findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openSettings();
+            }
+            }
+        );
 
     }
 
@@ -310,6 +320,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void openAboutUs(){
         Intent intent = new Intent(this, aboutus.class);
         startActivity(intent);
+    }
+
+    //function to bring up the settings button
+    public void openSettings(){
+        Intent settingsIntent = new Intent(this,appsettings.class);
+        startActivity(settingsIntent);
     }
 
     @Override
