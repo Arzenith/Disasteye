@@ -4,6 +4,7 @@ package com.example.disasteye;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -376,6 +377,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         newsTitle.setVisibility(View.INVISIBLE);
         ListView newss = findViewById(R.id.newslistview);
         newss.setVisibility(View.INVISIBLE);
+        FrameLayout box1 = findViewById(R.id.box1);
+        box1.setVisibility(View.INVISIBLE);
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -400,6 +403,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 newsTitle.setVisibility(View.VISIBLE);
                 newsTitle.setPaintFlags(newsTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                 newss.setVisibility(View.VISIBLE);
+                box1.setVisibility(View.VISIBLE);
 
                 Event e = null;
                 for(int i =0;i<eventArray.size();i++){
@@ -421,80 +425,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Parse the tile for querying it to the database. Currently , based on extracting name
                 // out of title. For future , trying to map coordinate to place/state.
 
-                if (result.equals("United States"))
-                {
+                if (result.equals("United States")) {
                     String[] arr = markerName.split(",");
-                    try
-                    {
+                    try {
                         key = arr[arr.length-2];
 //                        System.out.println(arr[arr.length-2]);
                     }
-                    catch (Exception err)
-                    {
+                    catch (Exception err) {
                         key = "RECENT";
 //                        System.out.println("Error");
                     }
                 }
-                else if(result.contains(" - United States"))
-                {
+                else if(result.contains(" - United States")) {
 //                    System.out.println("Success");
                     String[] arr = markerName.split(",");
                     String last;
-                    try
-                    {
+                    try {
                         last = arr[arr.length-1];
-
                     }
-                    catch (Exception err)
-                    {
+                    catch (Exception err) {
                         last = "Recent" ;
 //                        System.out.println("Error");
                     }
-
                     String[] arr_2 = last.split("-");
                     key = arr_2[0];
                     key = key.substring(0,key.length()-1);
 //                    System.out.println(key + "SUCCESS \n");
-
                 }
-                else
-                {
+                else {
                     String[] arr = markerName.split(",");
                     //IF BRIGHTON HOVE - uNITED kINGDOM
-                    if(arr[arr.length-1].contains("-"))
-                    {
+                    if(arr[arr.length-1].contains("-")) {
                         //get value after -
-                        try
-                        {
+                        try {
                             String[] splitIntoTwo = arr[arr.length-1].split("-");
                             key = splitIntoTwo[splitIntoTwo.length-1];
 //                            System.out.println(key + "SUCCESS");
-
                         }
-                        catch (Exception err)
-                        {
+                        catch (Exception err) {
                             key = "Recent";
                         }
-
-
                     }
-                    else
-                    {
-
-                        try
-                        {
+                    else {
+                        try {
                             key = arr[arr.length-1];
-
                         }
-                        catch (Exception err)
-                        {
+                        catch (Exception err) {
                             key = "Recent";
                         }
-
                     }
-
-
-
                 }
 
                 key = key  +" "+e.disasterType;
@@ -502,28 +481,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 System.out.println("The key for the current class is" + key + "\n");
 
                 //Code for pulling database values out. Ignore out.
-                 ArrayList<String> news_headline  = new ArrayList<String>();
-                 ArrayList<String> news_link = new ArrayList<>();
+                ArrayList<String> news_headline  = new ArrayList<String>();
+                ArrayList<String> news_link = new ArrayList<>();
 
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(key);
 
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot)
-                    {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String news; String link;
                         news_headline.clear();
                         news_link.clear();
-                        for  (DataSnapshot unique_id : snapshot.getChildren()) //Iterate through the child node and the unique id
-                        {
+                        for  (DataSnapshot unique_id : snapshot.getChildren()) { //Iterate through the child node and the unique id
                             news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
-                            System.out.println(news);
+                           //System.out.println(news);
                             news_headline.add(news);
                             link = unique_id.child("Link").getValue(String.class);
-                            System.out.println(link);
+                            //System.out.println(link);
                             news_link.add(link);
-                            ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
-                            newss.setAdapter(arrayAdapter);
+                            News newwws = new News(MapsActivity.this,news_headline,news_link);
+                            //ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
+                            newss.setAdapter(newwws);
                         }
                         //note news_headline , news_link only exist inside this class.
 
@@ -534,30 +512,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
-//                //Print news value
-//                System.out.println("Trying to print stuff");
-//                for (int i=0; i<news_headline.size();i++)
-//                {
-//                    System.out.println(news_headline.get(i));
-//                    System.out.println(news_link.get(i));
-//                }
-
                 title.setText(markerName);
-                coordinates.setText(markerCoords.toString());
-                disastertype.setText(e.disasterType);
-                date.setText(e.date);
+                coordinates.setText(e.formattedCoordinates());
+                date.setText(e.formattedDate());
 
                 if(e.disasterType.equals("wildfires")){
                     img.setImageResource(R.drawable.ic_wild_fire);
+                    disastertype.setText("Wildfire");
+                    disastertype.setTextColor(Color.parseColor("#ec0900"));
                 }
                 else if(e.disasterType.equals("volcanoes")){
                     img.setImageResource(R.drawable.ic_volcano);
+                    disastertype.setText("Volcano");
+                    disastertype.setTextColor(Color.parseColor("#e7b752"));
                 }
                 else if(e.disasterType.equals("seaLakeIce")){
                     img.setImageResource(R.drawable.ic_ice);
+                    disastertype.setText("Iceburg");
+                    disastertype.setTextColor(Color.parseColor("#46c3e6"));
                 }
                 else if(e.disasterType.equals("severeStorms")){
                     img.setImageResource(R.drawable.ic_storm);
+                    disastertype.setText("Severe Storm");
+                    disastertype.setTextColor(Color.parseColor("#2e5da2"));
                 }
 
                 return false;

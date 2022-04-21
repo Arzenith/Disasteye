@@ -47,6 +47,17 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_remove_24" />
 
+        <FrameLayout
+            android:id="@+id/box1"
+            android:layout_width="375dp"
+            android:layout_height="282dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/box"
+            />
+
         <TextView
             android:id="@+id/bottomsheeteventtitle"
             android:layout_width="200dp"
@@ -56,7 +67,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="200dp"
             android:text="Description"
-            android:textColor="#fff"
+            android:textColor="#98f5ff"
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             />
@@ -68,7 +79,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="90dp"
             android:layout_marginBottom="140dp"
-            android:textColor="#fff"
+            android:textColor="#98f5ff"
             android:textSize="17sp"
             android:fontFamily="sans-serif"
             />
@@ -80,8 +91,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="200dp"
-            android:text="Type"
-            android:textColor="#fff"
+            android:text="Event Type"
+            android:textColor="#ace1af"
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             />
@@ -93,7 +104,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="115dp"
             android:layout_marginBottom="165dp"
-            android:textColor="#fff"
+            android:textColor="#ace1af"
             android:textSize="17sp"
             android:fontFamily="sans-serif"
             />
@@ -116,7 +127,7 @@
             android:layout_marginBottom="70dp"
             android:layout_marginLeft="10dp"
             android:text="Coordinates"
-            android:textColor="#fff"
+            android:textColor="#f4c2c2"
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             />
@@ -128,7 +139,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="90dp"
             android:layout_marginBottom="10dp"
-            android:textColor="#fff"
+            android:textColor="#f4c2c2"
             android:textSize="17sp"
             android:fontFamily="sans-serif"
             />
@@ -141,7 +152,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="70dp"
             android:text="Date"
-            android:textColor="#fff"
+            android:textColor="#eed5b7"
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             />
@@ -153,7 +164,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="10dp"
-            android:textColor="#fff"
+            android:textColor="#eed5b7"
             android:textSize="17sp"
             android:fontFamily="sans-serif"
             />
@@ -166,8 +177,8 @@
             android:layout_marginRight="90dp"
             android:layout_marginTop="75dp"
             android:layout_marginLeft="10dp"
-            android:text="News"
-            android:textColor="#fff"
+            android:text="Relevant News"
+            android:textColor="#c1c1ff"
             android:textSize="24sp"
             android:fontFamily="sans-serif-medium"
             />
@@ -175,15 +186,15 @@
         <RelativeLayout
             android:id="@+id/bottomsheetrelative"
             android:layout_width="360dp"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="250dp">
+            android:layout_marginTop="200dp">
 
             <ListView
                 android:id="@+id/newslistview"
                 android:layout_width="match_parent"
                 android:layout_height="259dp"
-                android:outlineAmbientShadowColor="#fff"/>
+                android:outlineAmbientShadowColor="#fff" />
         </RelativeLayout>
 
 
