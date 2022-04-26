@@ -515,13 +515,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 news = unique_id.child("News Headline").getValue(String.class); //Get news from the firebase
                                 System.out.println(news);
                                 //Check if news is relevant.
+
                                 news_headline.add(news);
                                 link = unique_id.child("Link").getValue(String.class);
                                 System.out.println(link);
                                 news_link.add(link);
                                 News newwws = new News(MapsActivity.this,news_headline,news_link);
-                                //ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
+                                    //ArrayAdapter arrayAdapter= new ArrayAdapter(MapsActivity.this,R.layout.listviewtextcolor, news_headline);
                                 newss.setAdapter(newwws);
+
+
+
 
 
 
@@ -533,7 +537,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             //Idea for future: If no snapshot , try to add to firebase for future references.
                             news_headline.add("Click for Relevant News");
 
-                            news_link.add("https://www.google.com/search?q="+google_search_key+"ress+abc&source=lmns&tbm=nws&bih=665&biw=1309&rlz=1C5CHFA_enNP906NP906&hl=en&sa=X&ved=2ahUKEwiltsSFkqb3AhUEA50JHSxmAIsQ_AUoAnoECAEQAg");
+                            news_link.add("https://www.google.com/search?q="+google_search_key+"&source=lmns&tbm=nws&bih=665&biw=1309&rlz=1C5CHFA_enNP906NP906&hl=en&sa=X&ved=2ahUKEwiltsSFkqb3AhUEA50JHSxmAIsQ_AUoAnoECAEQAg");
                             News newwws = new News(MapsActivity.this,news_headline,news_link);
                             newss.setAdapter(newwws);
                         }
