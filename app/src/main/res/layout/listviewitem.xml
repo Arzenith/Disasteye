@@ -20,8 +20,7 @@
             android:layout_marginBottom="10dp"
             android:text="test"
             android:textSize="17sp"
-            android:textColor="#c1c1ff"
+            android:textColor="#FFF"
             android:fontFamily="@font/montserrat_semibold"/>
-
     </LinearLayout>
 </LinearLayout>

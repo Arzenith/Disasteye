@@ -558,22 +558,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(e.disasterType.equals("wildfires")){
                     img.setImageResource(R.drawable.ic_wild_fire);
                     disastertype.setText("Wildfire");
-                    disastertype.setTextColor(Color.parseColor("#ec0900"));
                 }
                 else if(e.disasterType.equals("volcanoes")){
                     img.setImageResource(R.drawable.ic_volcano);
                     disastertype.setText("Volcano");
-                    disastertype.setTextColor(Color.parseColor("#e7b752"));
                 }
                 else if(e.disasterType.equals("seaLakeIce")){
                     img.setImageResource(R.drawable.ic_ice);
                     disastertype.setText("Iceburg");
-                    disastertype.setTextColor(Color.parseColor("#46c3e6"));
                 }
                 else if(e.disasterType.equals("severeStorms")){
                     img.setImageResource(R.drawable.ic_storm);
                     disastertype.setText("Severe Storm");
-                    disastertype.setTextColor(Color.parseColor("#2e5da2"));
                 }
 
                 return false;

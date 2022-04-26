@@ -26,12 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 
 
     <FrameLayout
@@ -67,7 +63,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginBottom="200dp"
             android:text="Description"
-            android:textColor="#98f5ff"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             />
@@ -80,7 +76,7 @@
             android:layout_marginRight="90dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="140dp"
-            android:textColor="#98f5ff"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:fontFamily="@font/montserrat_semibold"
             />
@@ -93,7 +89,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="200dp"
             android:text="Event Type"
-            android:textColor="#ace1af"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             />
@@ -105,7 +101,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="115dp"
             android:layout_marginBottom="165dp"
-            android:textColor="#ace1af"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:fontFamily="@font/montserrat_semibold"
             />
@@ -128,7 +124,7 @@
             android:layout_marginBottom="70dp"
             android:layout_marginLeft="25dp"
             android:text="Coordinates"
-            android:textColor="#f4c2c2"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             />
@@ -141,7 +137,7 @@
             android:layout_marginRight="90dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
-            android:textColor="#f4c2c2"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:fontFamily="@font/montserrat_semibold"
             />
@@ -154,7 +150,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="70dp"
             android:text="Start Date"
-            android:textColor="#eed5b7"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             />
@@ -166,7 +162,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
             android:layout_marginBottom="10dp"
-            android:textColor="#eed5b7"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:fontFamily="@font/montserrat_semibold"
             />
@@ -180,7 +176,7 @@
             android:layout_marginTop="75dp"
             android:layout_marginLeft="10dp"
             android:text="Relevant News"
-            android:textColor="#c1c1ff"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             />
@@ -198,12 +194,5 @@
                 android:layout_height="259dp"
                 android:outlineAmbientShadowColor="#fff" />
         </RelativeLayout>
-
-
-
     </FrameLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
