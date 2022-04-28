@@ -14,7 +14,7 @@
 
 ## Demo
 <div id="header">
-  <img src="https://media.giphy.com/media/6gNcl0SsFKxahtfyVq/giphy.gif" width="200"/>
+  <img src="https://thumbs.gfycat.com/MarvelousGrayEnglishpointer-size_restricted.gif" width="200"/>
 </div>
 
 ### Credits
