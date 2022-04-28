@@ -12,8 +12,10 @@
 - [x] 🕵️‍♂️&nbsp;&nbsp;&nbsp;Details about current disaster
 - [ ] ⚙&nbsp;&nbsp;&nbsp;Settings Page
 
-## Screenshots
-![](images/Disasteye_SS_1.png)![](images/Disasteye_SS_2_2.0.png)![](images/Disasteye_SS_3_2.0.png)![](images/Disasteye_SS_4_2.0.png)
+## Demo
+<div id="header">
+  <img src="https://media.giphy.com/media/6gNcl0SsFKxahtfyVq/giphy.gif" width="200"/>
+</div>
 
 ### Credits
 Fire by Bohdan Burmich from NounProject.com
