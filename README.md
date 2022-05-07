@@ -17,6 +17,16 @@
   <img src="https://thumbs.gfycat.com/MarvelousGrayEnglishpointer-size_restricted.gif" width="200"/>
 </div>
 
+## How to run the app
+
+Step 1: Open android studio, and clone the disasteye repository.
+
+Step 2: In the local.properties under Grade Scripts folder, under line 8, insert
+        the following statement: "GMP_KEY=APIKEY", replacing the "APIKEY" with a Google
+        Map API key.
+
+Step 3: Run the app on an emulator.
+
 ### Credits
 Fire by Bohdan Burmich from NounProject.com
 
