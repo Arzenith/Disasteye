@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -107,6 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView swiper;
     private ImageButton aboutUs;
     private ImageButton settings;
+    private Button donateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -314,6 +316,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         );
 
+        donateButton = findViewById(R.id.donatebutton);
+
+        donateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDonationLink("https://www.redcross.org/donate/donation.html/");
+            }
+        });
+
+    }
+
+    //Function to go to the donation url
+    public void openDonationLink(String url){
+        Uri link = Uri.parse(url);
+        startActivity(new Intent(Intent.ACTION_VIEW,link));
     }
 
     //Function to bring up the about us page
@@ -395,6 +412,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         newss.setVisibility(View.INVISIBLE);
         FrameLayout box1 = findViewById(R.id.box1);
         box1.setVisibility(View.INVISIBLE);
+        donateButton.setVisibility(View.INVISIBLE);
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -420,6 +438,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 newsTitle.setPaintFlags(newsTitle.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
                 newss.setVisibility(View.VISIBLE);
                 box1.setVisibility(View.VISIBLE);
+                donateButton.setVisibility(View.VISIBLE);
 
                 Event e = null;
                 for(int i =0;i<eventArray.size();i++){
