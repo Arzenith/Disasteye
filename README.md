@@ -7,7 +7,7 @@
 - [x] 🔍&nbsp;&nbsp;&nbsp;Search Bar
 - [x] 🗺&nbsp;&nbsp;&nbsp;Realtime Map updates
 - [x] &nbsp;🚩&nbsp;&nbsp;Filter by different disaster types
-- [ ] &nbsp;💲&nbsp;&nbsp;&nbsp;&nbsp;Donate link
+- [x] &nbsp;💲&nbsp;&nbsp;&nbsp;&nbsp;Donate link
 - [x] 🌐&nbsp;&nbsp;&nbsp;News about disaster
 - [x] 🕵️‍♂️&nbsp;&nbsp;&nbsp;Details about current disaster
 - [ ] ⚙&nbsp;&nbsp;&nbsp;Settings Page
