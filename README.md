@@ -14,7 +14,7 @@
 
 ## Demo
 <div id="header">
-  <img src="https://thumbs.gfycat.com/MarvelousGrayEnglishpointer-size_restricted.gif" width="200"/>
+  <img src="https://media4.giphy.com/media/nFYSWNHom6vtFwwqcB/giphy.gif?cid=790b7611c34fafc74fa2766b28d36d3db07c88e5115ade61&rid=giphy.gif&ct=g" width="200"/>
 </div>
 
 ## How to run the app
